@@ -62,11 +62,23 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 //===============ROUTES===============
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 //This section will hold our Routes
 app.use('/', express.static('public'));
+app.use('/node_modules', express.static('node_modules'));
 // app.get('/', function(req, res) {
 //     res.send('hello world');
 // });
+
+app.get('/contacts', function(req, res){
+   res.send( [{firstName: 'Ran', lastName: 'Wahle'
+   , eMail: 'ran.wahle@gmail.com'}]);
+});
 
 //===============PORT=================
 var port = process.env.PORT || 5000; //select your port or let it pull from your .env file
