@@ -19,4 +19,11 @@ export class ContactsActions{
          type: Contacts.GetContacts
         });
     }
+
+    addContact(contact){
+        this.store.dispatch({
+            type: Contacts.AddContact,
+            payload: contact
+        });
+    }
 }

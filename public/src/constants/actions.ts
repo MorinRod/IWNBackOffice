@@ -5,5 +5,6 @@ export const Contacts = {
     Filter: 'Contacts_Filter',
     GetContacts: 'Contacts_GetContacts',
     Loaded : 'Contacts_Loaded',
-    LoadingError: 'Concatcs_LoadingError'
+    LoadingError: 'Concatcs_LoadingError',
+    AddContact: 'Contacts_AddContact'
 };

@@ -76,8 +76,26 @@ app.use('/node_modules', express.static('node_modules'));
 // });
 
 app.get('/contacts', function(req, res){
-   res.send( [{firstName: 'Ran', lastName: 'Wahle'
-   , eMail: 'ran.wahle@gmail.com'}]);
+    var dataAccess = require('./dataAccess');
+    dataAccess.getContacts(function(err, results){
+        console.log('error', err);
+        console.log('results', results);
+        res.send(results);
+    });
+   // res.send( [{firstName: 'Ran', lastName: 'Wahle'
+   // , eMail: 'ran.wahle@gmail.com'}]);
+});
+app.post('/contacts', function(req, res){
+    try {
+      var dataAccess = require('./dataAccess');
+
+        dataAccess.newContact(req.body);
+    }
+    catch(err){
+        console.error(err);
+    }
+    res.send();
+
 });
 
 //===============PORT=================

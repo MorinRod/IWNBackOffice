@@ -8,6 +8,7 @@ import {ContactsListCompoenent} from "./components/contactsList.component";
 
     template: `<h1>אנשי קשר שדולת הנשים</h1>
 <contacts-list-component></contacts-list-component>
+<edit-contact></edit-contact>
 `
 })
 export class AppComponent { }

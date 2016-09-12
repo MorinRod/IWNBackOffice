@@ -6,5 +6,6 @@ export class Contact{
     lastName: string;
     eMail: string;
     address: string;
+    idNumber: string;
 
 }

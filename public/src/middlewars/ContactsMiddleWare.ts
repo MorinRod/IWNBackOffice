@@ -34,18 +34,21 @@ export class ContactsMiddleWare {
             this._http.get(this.url).subscribe(successHandler, errorHandler);
 
 
-            // return next({
-            //     type: Contacts.Loaded,
-            //     payload: [
-            //         {
-            //             firstName: 'Ran',
-            //             lastName: 'Wahle',
-            //             eMail: 'ran.wahle@gmail.com',
-            //
-            //         }
-            //
-            //     ]
-            // });
+
+        }
+
+        else if (action.type === Contacts.AddContact){
+            const successHandler = result => next({
+                type   : Contacts.Loaded,
+                payload: action.payload
+            });
+
+            const errorHandler = error => next({
+                type   : Contacts.LoadingError,
+                payload: error.json()
+            });
+
+            this._http.post(this.url, action.payload).subscribe(successHandler, errorHandler);
         }
 
         else {
