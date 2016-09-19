@@ -8,3 +8,17 @@ export const Contacts = {
     LoadingError: 'Concatcs_LoadingError',
     AddContact: 'Contacts_AddContact'
 };
+
+
+export const Users = {
+    SetCurrentUser: 'Users_SetCurrentUser',
+    GetCurrentUser: 'Users_GetCurrentUser',
+    CurrentUserLoaded: 'Users_CurrentUserLoaded',
+    LoadingError: 'Users_LoadingError',
+    LogOut: 'Users_LogOut'
+};
+
+export const Server = {
+    OnServerCall: 'Server_OnServerCall',
+    DismissServerCall : 'Server_DismissServerCall'
+};

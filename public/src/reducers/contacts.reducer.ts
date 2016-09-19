@@ -13,7 +13,7 @@ export function contactsReducer(state = [], action){
         }
 
         case Contacts.Loaded:{
-            return [state, ...action.payload];
+            return [...action.payload];
         }
     }
     return [];

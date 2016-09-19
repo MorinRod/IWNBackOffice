@@ -10,9 +10,11 @@ var express = require('express'),
     methodOverride = require('method-override'),
     session = require('express-session'),
     passport = require('passport'),
+    flash = require('connect-flash'),
     LocalStrategy = require('passport-local'),
     TwitterStrategy = require('passport-twitter'),
     GoogleStrategy = require('passport-google'),
+   mongoose = require('mongoose'),
     FacebookStrategy = require('passport-facebook');
 
 //We will be creating these two files shortly
@@ -21,16 +23,21 @@ var express = require('express'),
 
 var app = express();
 
+var configDB = require('./auth/config/database.js');
+
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
+
 //===============PASSPORT===============
 
 //This section will contain our work with Passport
-
+require('./auth/config/passport')(passport); // pass passport for configuration
 
 //===============EXPRESS================
 // Configure Express
 app.use(logger('combined'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
@@ -38,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Session-persisted message middleware
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
     var err = req.session.error,
         msg = req.session.notice,
         success = req.session.success;
@@ -54,50 +61,19 @@ app.use(function(req, res, next){
     next();
 });
 
-// Configure express to use handlebars templates
-var hbs = exphbs.create({
-    defaultLayout: 'main', //we will be creating this layout shortly
-});
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-//===============ROUTES===============
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
-//This section will hold our Routes
-app.use('/', express.static('public'));
-app.use('/node_modules', express.static('node_modules'));
-// app.get('/', function(req, res) {
-//     res.send('hello world');
+// // Configure express to use handlebars templates
+// var hbs = exphbs.create({
+//     defaultLayout: 'main', //we will be creating this layout shortly
 // });
+// app.engine('handlebars', hbs.engine);
+// app.set('view engine', 'handlebars');
 
-app.get('/contacts', function(req, res){
-    var dataAccess = require('./dataAccess');
-    dataAccess.getContacts(function(err, results){
-        console.log('error', err);
-        console.log('results', results);
-        res.send(results);
-    });
-   // res.send( [{firstName: 'Ran', lastName: 'Wahle'
-   // , eMail: 'ran.wahle@gmail.com'}]);
-});
-app.post('/contacts', function(req, res){
-    try {
-      var dataAccess = require('./dataAccess');
 
-        dataAccess.newContact(req.body);
-    }
-    catch(err){
-        console.error(err);
-    }
-    res.send();
-
-});
-
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+//===============ROUTES===============
+require('./routes.js')(app, passport, express);
 //===============PORT=================
 var port = process.env.PORT || 5000; //select your port or let it pull from your .env file
 app.listen(port);

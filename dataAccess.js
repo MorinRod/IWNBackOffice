@@ -5,7 +5,7 @@
 var couchbase = require('couchbase')
 
 function newContact(contactToAdd) {
-    if (!contactToAdd || !contactToAdd.idNumber) {
+    if (!contactToAdd || !contactToAdd.eMail) {
         throw 'Missing contact Id number';
     }
 
@@ -18,7 +18,7 @@ function newContact(contactToAdd) {
     contactToAdd.type = 'contact';
 
     console.log('contact to add', contactToAdd);
-    bucket.upsert('contact_' + contactToAdd.email, contactToAdd,
+    bucket.upsert('contact_' + contactToAdd.eMail, contactToAdd,
         function (err, result) {
             if (err) {
                 console.error(err);
@@ -47,5 +47,37 @@ function getContacts(callback) {
 
 }
 
+function getUserByToken(userToken, callback) {
+    var cluster = new couchbase.Cluster('couchbase://127.0.0.1/');
+    var bucket = cluster.openBucket('IWNContacts');
+    bucket.operationTimeout = 120 * 1000;
+    bucket.get(userToken, function (err, result) {
+        if (err) {
+            console.error(err, userToken);
+        }
+        callback(err, result);
+
+    });
+}
+
+function saveUser(user, callback) {
+    var cluster = new couchbase.Cluster('couchbase://127.0.0.1/');
+    var bucket = cluster.openBucket('IWNContacts');
+    bucket.operationTimeout = 120 * 1000;
+
+    user.type = 'user';
+    console.log('saveing user', user);
+    bucket.upsert('user_' + user.id, user,
+        function (err, result) {
+            if (err) {
+                console.error(err);
+
+            }
+            callback(err, result);
+
+        });
+}
 exports.newContact = newContact;
 exports.getContacts = getContacts;
+exports.getUserByToken = getUserByToken;
+exports.saveUser = saveUser;

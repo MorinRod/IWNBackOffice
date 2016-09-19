@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Contacts} from '../constants/actions';
+import {Contacts, Server} from '../constants/actions';
 import {Http} from "@angular/http";
 
 
@@ -12,63 +12,80 @@ export class ContactsMiddleWare {
     private _http: Http;
     private url: string;
 
+
     constructor(_http: Http) {
         this._http = _http;
         this.url = 'http://localhost:5000/contacts';
+
+    }
+
+    getContacts(store, next) {
+
+        let self = this;
+        const successHandler = result => {
+            store.dispatch({type:Server.DismissServerCall});
+            console.log('contacts result', result);
+            let results = result.json();
+            results.forEach(contact => {
+                contact.isEdited = false;
+                if (!contact.eMail) {
+                    contact.eMail = contact.email;
+                }
+            });
+
+            return next({
+                type: Contacts.Loaded,
+                payload: results
+            });
+        };
+
+        const errorHandler = error => {
+
+            store.dispatch({type:Server.DismissServerCall});
+            return next({
+                type: Contacts.LoadingError,
+                payload: error.json()
+            });
+        }
+
+        this._http.get(this.url).subscribe(successHandler, errorHandler);
+        return next({type: Server.OnServerCall});
+
     }
 
     middleware = store => next => action => {
         if (action.type === Contacts.GetContacts) {
 
 
-            const successHandler = result => next({
-                type   : Contacts.Loaded,
-                payload: result.json()
-            });
-
-            const errorHandler = error => next({
-                type   : Contacts.LoadingError,
-                payload: error.json()
-            });
-
-            this._http.get(this.url).subscribe(successHandler, errorHandler);
-
+            return this.getContacts(store, next);
 
 
         }
 
-        else if (action.type === Contacts.AddContact){
-            const successHandler = result => next({
-                type   : Contacts.Loaded,
-                payload: action.payload
-            });
+        else if (action.type === Contacts.Loaded ||
+            action.type === Contacts.LoadingError) {
+
+        }
+
+        else if (action.type === Contacts.AddContact) {
+            const addContactSuccessHandler = result => {
+                return this.getContacts(store, next);
+
+            };
 
             const errorHandler = error => next({
-                type   : Contacts.LoadingError,
+                type: Contacts.LoadingError,
                 payload: error.json()
             });
 
-            this._http.post(this.url, action.payload).subscribe(successHandler, errorHandler);
+            this._http.post(this.url, action.payload)
+                .subscribe(addContactSuccessHandler, errorHandler);
         }
 
         else {
             return next(action);
         }
     }
-
-    // getContacts(){
-    //     let contacts = [
-    //         {firstName: 'Ran',
-    //             lastName: 'Wahle',
-    //             eMail: 'ran.wahle@gmail.com',
-    //
-    //         }
-    //
-    //     ];
-    //
-    //    return contacts;
-    //
-    // }
 
 
 }

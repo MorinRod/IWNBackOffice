@@ -15,4 +15,31 @@ body {
 
 .header-row{
     background-color: azure;
+    font-size:10px;
+}
+
+div.col-xs-1,
+div.col-xs-2{
+    max-height:14px;
+    min-height:14px;
+}
+
+.spacerDiv{
+    max-height:14px;
+    min-height:14px;
+}
+
+contact-component .col-xs-1,
+contact-component .col-xs-2,
+edit-contact input
+{
+ font-size:10px;
+    border-bottom-width:1px;
+    border-bottom-style: solid;
+    overflow: hidden;
+
+}
+
+edit-contact input{
+    max-width: 100%;
 }

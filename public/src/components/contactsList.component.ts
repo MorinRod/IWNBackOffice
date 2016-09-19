@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Store} from "../app.store";
 import {ContactsActions} from "../actions/contacts.actions";
 import {ContactComponent} from "./ContactComponent";
@@ -9,19 +9,27 @@ import {EditContact} from "./EditContact";
 @Component({
     selector: 'contacts-list-component',
     directives: [ContactComponent, EditContact],
-    template: `<h2>אנשי קשר</h2>
+    template: `<h2>אנשי קשר ({{_store.state.contacts ? _store.state.contacts.length : 0}})</h2>
 <button (click)="getContacts()" class="glyphicon glyphicon-refresh">טעינת אנשי קשר</button>
-<div *ngIf="_store.state.contacts.length">
+<div *ngIf="_store.state.contacts && _store.state.contacts.length">
 <div class="row" >
 <div class="col-xs-1 header-row">שם פרטי</div>
 <div class="col-xs-1 header-row">שם משפחה</div>
-<div class="col-xs-1 header-row">e-mail</div>
+<div class="col-xs-2 header-row">e-mail</div>
+<div class="col-xs-1 header-row hidden-xs">מתאריך</div>
+<div class="col-xs-1 header-row hidden-xs" >עד תאריך</div>
+<div class="col-xs-1 header-row hidden-xs">יישוב</div>
+<div class="col-xs-1 header-row hidden-xs">כתובת</div>
+<div class="col-xs-1 header-row hidden-xs">טלפון</div>
+<div class="col-xs-1 header-row">מעוניינת בעדכונים</div>
+<div class="col-xs-1 header-row">מעוניינת להצטרף</div>
 </div>
+<div class="spacerDiv"></div>
 <div class="row" *ngFor="let contact of _store.state.contacts ">
 
 <contact-component *ngIf="contact && !contact.isEdited" [contact]="contact"></contact-component>
 <div class="col-xs-1" *ngIf="!contact.isEdited" >
-<a class="glyphicon glyphicon-pencil" href="javascript:void(0)" (click)="editContact(contact)"></a>
+<a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה" (click)="editContact(contact)"></a>
  </div>
 <edit-contact *ngIf="contact.isEdited" [editedContact]="contact"></edit-contact>
 </div>
@@ -30,7 +38,10 @@ import {EditContact} from "./EditContact";
 `
 
 })
-export class ContactsListCompoenent {
+export class ContactsListComponent implements OnInit{
+    ngOnInit(): void {
+        this.getContacts();
+    }
 
     private contacts: ContactsActions;
     private _store: Store

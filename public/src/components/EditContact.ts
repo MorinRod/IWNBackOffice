@@ -8,10 +8,24 @@ import {Contact} from "../models/Contact";
 @Component({
     selector: 'edit-contact',
     template: `<form (submit)="addNewContact()" *ngIf="editedContact">
-<input type="text" placeholder="שם פרטי" [(ngModel)]="editedContact.firstName" name="firstName"/>
-<input type="text" placeholder="שם משפחה" [(ngModel)]="editedContact.lastName" name="lastName"/>
-<input type="text" placeholder="מספר זהות" [(ngModel)]="editedContact.idNumber" name="idNumber"/>
- <input type="email" placeholder="e-mail"  [(ngModel)]="editedContact.email" name="email"/>
+<div class="col-xs-1" ><input type="text" placeholder="שם פרטי" [(ngModel)]="editedContact.firstName" name="firstName"/>
+</div>
+<div class="col-xs-1" ><input type="text" placeholder="שם משפחה" [(ngModel)]="editedContact.lastName" name="lastName"/>
+</div>
+
+<div class="col-xs-1" ><input type="email" placeholder="e-mail"  [(ngModel)]="editedContact.eMail" name="email"/>
+</div>
+<div class="col-xs-1 hidden-xs"> <input type="date" name="fromDate" [(ngModel)]="editedContact.fromDate"></div>
+<div class="col-xs-1 hidden-xs"> <input type="date" name="toDate" [(ngModel)]="editedContact.toDate"></div>
+<div class="col-xs-1 hidden-xs"> <input type="text" name="city" [(ngModel)]="editedContact.city"></div>
+<div class="col-xs-1 hidden-xs"> <input type="text" name="address" [(ngModel)]="editedContact.address"></div>
+<div class="col-xs-1 hidden-xs"> <input type="text" name="phoneNumber" [(ngModel)]="editedContact.phoneNumber"></div>
+<div class="col-xs-1 hidden-xs"> <input type="checkbox" name="wantUpdates" [(ngModel)]="editedContact.wantUpdates"></div>
+<div class="col-xs-1 hidden-xs"> <input type="checkbox" name="member" [(ngModel)]="editedContact.member"></div>
+
+
+
+ 
 <button type="submit" class="glyphicon glyphicon-floppy-disk"></button>
 </form>`
 
