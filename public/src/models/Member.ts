@@ -1,7 +1,7 @@
 /**
  * Created by ranwahle on 07/09/2016.
  */
-export class Contact{
+export class Member{
     firstName:string;
     lastName: string;
     eMail: string;
@@ -18,6 +18,7 @@ export class Contact{
     toDate: Date;
     successfullTransaction:boolean;
     number:number;
+    isEdited:boolean;
 
 
 }

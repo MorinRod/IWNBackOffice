@@ -4,10 +4,10 @@
 
 import {Injectable} from "@angular/core";
 import {Store} from "../app.store";
-import {Contacts} from "../constants/actions";
+import {Members} from "../constants/actions";
 
 @Injectable()
-export class ContactsActions{
+export class MembersActions{
     private store:Store;
 
     constructor(store:Store){
@@ -16,13 +16,20 @@ export class ContactsActions{
 
     getContacts(){
         this.store.dispatch({
-         type: Contacts.GetContacts
+         type: Members.GetContacts
         });
     }
 
-    addContact(contact){
+    saveContact(contact){
         this.store.dispatch({
-            type: Contacts.AddContact,
+            type: Members.SaveContact,
+            payload: contact
+        });
+    }
+
+    addContact(contact) {
+        this.store.dispatch({
+            type: Members.AddContact,
             payload: contact
         });
     }

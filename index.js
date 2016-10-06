@@ -14,7 +14,8 @@ var express = require('express'),
     LocalStrategy = require('passport-local'),
     TwitterStrategy = require('passport-twitter'),
     GoogleStrategy = require('passport-google'),
-   mongoose = require('mongoose'),
+ //  mongoose = require('mongoose'),
+    pulsimClient = require('./mailer/pulsimClient');
     FacebookStrategy = require('passport-facebook');
 
 //We will be creating these two files shortly
@@ -25,8 +26,8 @@ var app = express();
 
 var configDB = require('./auth/config/database.js');
 
-// configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+// // configuration ===============================================================
+// mongoose.connect(configDB.url); // connect to our database
 
 //===============PASSPORT===============
 

@@ -1,12 +1,13 @@
 /**
  * Created by ranwahle on 07/09/2016.
  */
-export const Contacts = {
-    Filter: 'Contacts_Filter',
-    GetContacts: 'Contacts_GetContacts',
-    Loaded : 'Contacts_Loaded',
-    LoadingError: 'Concatcs_LoadingError',
-    AddContact: 'Contacts_AddContact'
+export const Members = {
+    Filter: 'Members_Filter',
+    GetContacts: 'Members_GetContacts',
+    Loaded : 'Members_Loaded',
+    LoadingError: 'Members_LoadingError',
+    SaveContact: 'Members_SaveContact',
+    AddContact: 'Members_AddContact'
 };
 
 

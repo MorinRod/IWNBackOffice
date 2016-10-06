@@ -3,6 +3,7 @@
  */
 
 var couchbase = require('couchbase')
+var address = 'couchbase://10.211.55.11';
 
 function newContact(contactToAdd) {
     if (!contactToAdd || !contactToAdd.eMail) {
@@ -10,7 +11,7 @@ function newContact(contactToAdd) {
     }
 
 
-    var cluster = new couchbase.Cluster('couchbase://127.0.0.1/');
+    var cluster = new couchbase.Cluster(address);
     var bucket = cluster.openBucket('IWNContacts');
     bucket.operationTimeout = 120 * 1000;
 
@@ -28,7 +29,7 @@ function newContact(contactToAdd) {
 }
 
 function getContacts(callback) {
-    var cluster = new couchbase.Cluster('couchbase://127.0.0.1/');
+    var cluster = new couchbase.Cluster(address);
     var bucket = cluster.openBucket('IWNContacts');
     bucket.operationTimeout = 120 * 1000;
 
@@ -48,7 +49,7 @@ function getContacts(callback) {
 }
 
 function getUserByToken(userToken, callback) {
-    var cluster = new couchbase.Cluster('couchbase://127.0.0.1/');
+    var cluster = new couchbase.Cluster(address);
     var bucket = cluster.openBucket('IWNContacts');
     bucket.operationTimeout = 120 * 1000;
     bucket.get(userToken, function (err, result) {
@@ -61,7 +62,7 @@ function getUserByToken(userToken, callback) {
 }
 
 function saveUser(user, callback) {
-    var cluster = new couchbase.Cluster('couchbase://127.0.0.1/');
+    var cluster = new couchbase.Cluster(address);
     var bucket = cluster.openBucket('IWNContacts');
     bucket.operationTimeout = 120 * 1000;
 

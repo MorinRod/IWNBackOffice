@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Contacts, Server} from '../constants/actions';
+import { Server, Members} from '../constants/actions';
 import {Http} from "@angular/http";
 
 
@@ -7,7 +7,7 @@ import {Http} from "@angular/http";
  * Created by ranwahle on 07/09/2016.
  */
 @Injectable()
-export class ContactsMiddleWare {
+export class MembersMiddleware {
 
     private _http: Http;
     private url: string;
@@ -15,7 +15,7 @@ export class ContactsMiddleWare {
 
     constructor(_http: Http) {
         this._http = _http;
-        this.url = 'http://localhost:5000/contacts';
+        this.url = '/contacts';
 
     }
 
@@ -34,7 +34,7 @@ export class ContactsMiddleWare {
             });
 
             return next({
-                type: Contacts.Loaded,
+                type: Members.Loaded,
                 payload: results
             });
         };
@@ -43,7 +43,7 @@ export class ContactsMiddleWare {
 
             store.dispatch({type:Server.DismissServerCall});
             return next({
-                type: Contacts.LoadingError,
+                type: Members.LoadingError,
                 payload: error.json()
             });
         }
@@ -54,7 +54,7 @@ export class ContactsMiddleWare {
     }
 
     middleware = store => next => action => {
-        if (action.type === Contacts.GetContacts) {
+        if (action.type === Members.GetContacts) {
 
 
             return this.getContacts(store, next);
@@ -62,19 +62,19 @@ export class ContactsMiddleWare {
 
         }
 
-        else if (action.type === Contacts.Loaded ||
-            action.type === Contacts.LoadingError) {
+        else if (action.type === Members.Loaded ||
+            action.type === Members.LoadingError) {
 
         }
 
-        else if (action.type === Contacts.AddContact) {
+        else if (action.type === Members.SaveContact) {
             const addContactSuccessHandler = result => {
                 return this.getContacts(store, next);
 
             };
 
             const errorHandler = error => next({
-                type: Contacts.LoadingError,
+                type: Members.LoadingError,
                 payload: error.json()
             });
 

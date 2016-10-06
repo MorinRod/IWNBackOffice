@@ -2,12 +2,12 @@
  * Created by ranwahle on 07/09/2016.
  */
 import {combineReducers} from 'redux';
-import {contactsReducer} from "./contacts.reducer";
 import {UsersReducer} from "./users.reducer";
 import {serverReducer} from "./server.reducer";
+import {membersReducer} from "./members.reducer";
 
 export const RootReducer = combineReducers({
-    contacts: contactsReducer,
+    members: membersReducer,
     currentUser: UsersReducer,
     OnServerCall: serverReducer
 });

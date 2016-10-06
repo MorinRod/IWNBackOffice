@@ -14,9 +14,9 @@ import {UsersActions} from "./actions/users.actions";
 </span>
 
   <nav>
-    <a *ngIf="isLogedIn " [routerLink]="['/contacts-screen']">Contacts</a>
-    <a *ngIf="!isLogedIn" [routerLink]="['/register']">Register</a>
-    <a *ngIf= "isLogedIn" href="javascript:void(0)" (click)="userActions.logOut()">Log out</a>
+    <a *ngIf="isLogedIn " [routerLink]="['/members-screen']">חברים</a>
+    <a *ngIf="!isLogedIn" [routerLink]="['/login']">התחברות</a>
+    <a *ngIf= "isLogedIn" href="javascript:void(0)" (click)="userActions.logOut()">התנתקות</a>
   </nav>
   <spinner *ngIf="_store.state.OnServerCall.loading"></spinner>
   <router-outlet></router-outlet>`,

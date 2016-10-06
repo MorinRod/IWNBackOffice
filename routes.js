@@ -18,7 +18,7 @@ module.exports = function(app, passport, express) {
     // });
 
     app.use('/', express.static('public'));
-    app.use('/contacts-screen', isLoggedIn, express.static('public'));
+    app.use('/members-screen', isLoggedIn, express.static('public'));
     app.use('/register', express.static('public'));
     app.use('/node_modules', express.static('node_modules'));
 // app.get('/', function(req, res) {
@@ -34,6 +34,17 @@ module.exports = function(app, passport, express) {
         }
 
     });
+
+    app.get('/getUnsubscribedMails', function(req, res){
+        var pulsimClient = require('./mailer/pulsimClient');
+         pulsimClient.getUnsubscribedMails().then(function (result){
+             console.log(result);
+            res.send(result);
+
+         }).catch(function(err) {
+            res.send({error: err});
+         });
+    })
 
     app.get('/logout', function(req, res) {
         req.logout();

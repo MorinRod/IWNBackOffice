@@ -5,9 +5,8 @@
 
 import {Component} from "@angular/core";
 @Component({
-    template: `<a href="/auth/facebook" 
-    class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-    <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
+    template: `
+    <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Login With Google</a>
 `
 })
 

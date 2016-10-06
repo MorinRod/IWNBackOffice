@@ -1,12 +1,12 @@
 import { Routes, RouterModule } from '@angular/router';
-import {ContactsListComponent} from "./components/contactsList.component";
 import {ModuleWithProviders} from "@angular/core";
 import {RegisterComponent} from "./components/auth/register.component";
 import {WelcomeComponent} from "./components/WelcomeComponent";
+import {MembersListComponent} from "./components/membersList.component";
 
 const appRoutes: Routes = [
-    {path: 'contacts-screen', component: ContactsListComponent },
-    {path: 'register', component:RegisterComponent},
+    {path: 'members-screen', component: MembersListComponent },
+    {path: 'login', component:RegisterComponent},
     {path: '', component: WelcomeComponent}
 
 ];
