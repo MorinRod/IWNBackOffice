@@ -3,11 +3,11 @@
  */
 export const Members = {
     Filter: 'Members_Filter',
-    GetContacts: 'Members_GetContacts',
+    GetMembers: 'Members_GetMembers',
     Loaded : 'Members_Loaded',
     LoadingError: 'Members_LoadingError',
-    SaveContact: 'Members_SaveContact',
-    AddContact: 'Members_AddContact'
+    SaveMember: 'Members_SaveMember',
+    AddMember: 'Members_AddMember'
 };
 
 

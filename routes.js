@@ -108,7 +108,10 @@ module.exports = function(app, passport, express) {
             console.log('user', req.user);
             return next();
         }
+        else {
+            res.sendStatus(401);
+        }
 
-       return next({});
+       //return next();
     }
 };

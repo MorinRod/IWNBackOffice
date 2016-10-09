@@ -1,4 +1,4 @@
-import {Server} from "../constants/actions";
+import {Server, Members} from "../constants/actions";
 /**
  * Created by ranwahle on 19/09/2016.
  */
@@ -11,6 +11,7 @@ export function serverReducer(state = [], action){
         case Server.DismissServerCall:{
             return Object.assign({}, state, {loading: false} ) ;
         }
+
     }
 
     return state;

@@ -16,20 +16,20 @@ export class MembersActions{
 
     getContacts(){
         this.store.dispatch({
-         type: Members.GetContacts
+         type: Members.GetMembers
         });
     }
 
     saveContact(contact){
         this.store.dispatch({
-            type: Members.SaveContact,
+            type: Members.SaveMember,
             payload: contact
         });
     }
 
     addContact(contact) {
         this.store.dispatch({
-            type: Members.AddContact,
+            type: Members.AddMember,
             payload: contact
         });
     }

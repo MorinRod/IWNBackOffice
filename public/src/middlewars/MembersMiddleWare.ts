@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import { Server, Members} from '../constants/actions';
+import {Server, Members, Users} from '../constants/actions';
 import {Http} from "@angular/http";
 
 
@@ -17,6 +17,22 @@ export class MembersMiddleware {
         this._http = _http;
         this.url = '/contacts';
 
+    }
+
+    setChangedMember(store, savedMember){
+        savedMember.isEdited = false;
+        let members = store.getState().members;
+        let changedMember = members.find(member => member.key === savedMember.key
+       );
+
+        if (!changedMember ){
+            members.push(savedMember);
+        }
+        else{
+            members[members.indexOf(changedMember)]  = savedMember;
+        }
+
+        return members;
     }
 
     getContacts(store, next) {
@@ -41,10 +57,15 @@ export class MembersMiddleware {
 
         const errorHandler = error => {
 
+            console.log('error', error);
             store.dispatch({type:Server.DismissServerCall});
+
+            if (error.status === 401){
+                store.dispatch({type: Users.LogOut});
+            }
             return next({
                 type: Members.LoadingError,
-                payload: error.json()
+               payload: error.status
             });
         }
 
@@ -54,7 +75,7 @@ export class MembersMiddleware {
     }
 
     middleware = store => next => action => {
-        if (action.type === Members.GetContacts) {
+        if (action.type === Members.GetMembers) {
 
 
             return this.getContacts(store, next);
@@ -67,9 +88,11 @@ export class MembersMiddleware {
 
         }
 
-        else if (action.type === Members.SaveContact) {
+        else if (action.type === Members.SaveMember) {
             const addContactSuccessHandler = result => {
-                return this.getContacts(store, next);
+
+                let newPayload = this.setChangedMember(store, action.payload);
+               return next({type: Members.Loaded, payload: newPayload});
 
             };
 

@@ -17,9 +17,10 @@ import {BooleanPipe} from "./pipes/booleanPipe";
 import {WelcomeComponent} from "./components/WelcomeComponent";
 import {SpinnerComponent} from "./components/Spinner";
 import {MembersListComponent} from "./components/membersList.component";
+import {CommonComponents} from "./commonComponents/commomComponents.module";
 
 @NgModule({
-    imports:      [ BrowserModule, HttpModule, FormsModule, routing ],
+    imports:      [ BrowserModule, HttpModule, FormsModule, routing, CommonComponents ],
     declarations: [ AppComponent, WelcomeComponent, MembersListComponent, EditContact,
         ContactComponent,RegisterComponent, BooleanPipe, SpinnerComponent],
     bootstrap:    [ AppComponent ],

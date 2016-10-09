@@ -8,15 +8,18 @@ export function membersReducer(state = [], action){
             return [];
 
         }
-        case Members.GetContacts:{
+        case Members.GetMembers:{
             return [...state];
         }
 
         case Members.Loaded:{
             return [...action.payload];
         }
-        case Members.AddContact:{
+        case Members.AddMember:{
             return [...state, action.payload];
+        }
+        case Members.LoadingError:{
+            return Object.assign({}, state,  {status: action.payload} );
         }
     }
     return [];

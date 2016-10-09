@@ -6,7 +6,7 @@ var couchbase = require('couchbase')
 var address = 'couchbase://10.211.55.11';
 
 function newContact(contactToAdd) {
-    if (!contactToAdd || !contactToAdd.eMail) {
+    if (!contactToAdd || (!contactToAdd.eMail && !contactToAdd.idNumber && !contactToAdd.phoneNumber)) {
         throw 'Missing contact Id number';
     }
 
@@ -19,13 +19,30 @@ function newContact(contactToAdd) {
     contactToAdd.type = 'contact';
 
     console.log('contact to add', contactToAdd);
-    bucket.upsert('contact_' + contactToAdd.eMail, contactToAdd,
+    bucket.upsert(getKey(contactToAdd), contactToAdd,
         function (err, result) {
             if (err) {
                 console.error(err);
             }
 
         });
+}
+
+function getKey(contact){
+    let key = 'contact_';
+    if (contact.idNumber)
+    {
+        key += '_' + contact.idNumber;
+    }
+    else {
+        if (contact.phoneNumber) {
+            key += '_' + contact.phoneNumber;
+        }
+        if (contact.eMail){
+            key += '_' + contact.eMail;
+        }
+    }
+    return key;
 }
 
 function getContacts(callback) {
@@ -43,6 +60,10 @@ function getContacts(callback) {
         if (results) {
             resultsToSend = results.map(item => item.value);
         }
+        resultsToSend.forEach((item, index) => {
+            item.key = results[index].key;
+        });
+
         callback(err, resultsToSend);
     });
 
