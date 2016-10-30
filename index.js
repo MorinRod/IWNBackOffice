@@ -21,7 +21,7 @@ var express = require('express'),
 //We will be creating these two files shortly
 // var config = require('./config.js'), //config file contains all tokens and other private info
 //    funct = require('./functions.js'); //funct file contains our helper functions for our Passport and database work
-
+let config = require('./config');
 var app = express();
 
 var configDB = require('./auth/config/database.js');
@@ -70,12 +70,12 @@ app.use(function (req, res, next) {
 // app.set('view engine', 'handlebars');
 
 
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+// app.use(passport.initialize());
+// app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 //===============ROUTES===============
 require('./routes.js')(app, passport, express);
 //===============PORT=================
-var port = process.env.PORT || 5000; //select your port or let it pull from your .env file
+var port = process.env.PORT || config.port || 5000; //select your port or let it pull from your .env file
 app.listen(port);
 console.log("listening on " + port + "!");

@@ -1,6 +1,7 @@
 import {Users} from "../constants/actions";
 import {Http} from "@angular/http";
 import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
 /**
  * Created by ranwahle on 14/09/2016.
  */
@@ -9,10 +10,12 @@ export class UserMiddleware{
 
     private _http:Http;
     private url:string;
+    private _router:Router;
 
-    constructor(_http:Http){
+    constructor(_http:Http, _router:Router){
         this._http = _http;
-        this.url = 'http://localhost:5000/currentUser';
+        this.url = '/currentUser';
+        this._router = _router;
 
     }
     middleware = store => next => action => {
@@ -36,13 +39,15 @@ export class UserMiddleware{
         }
 
         else if (action.type === Users.LogOut){
+            let self = this;
             const handler = result => {
+                self._router.navigate(['/']);
                 return next ({
                     type: Users.CurrentUserLoaded,
                     payload: null
                 })
             };
-            this._http.get('http://localhost:5000/logout').subscribe(handler, handler);
+            this._http.get('/logout').subscribe(handler, handler);
         }
         return next(action);
     };

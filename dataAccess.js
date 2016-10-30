@@ -2,8 +2,9 @@
  * Created by ranwahle on 11/09/2016.
  */
 
-var couchbase = require('couchbase')
-var address = 'couchbase://10.211.55.11';
+let couchbase = require('couchbase');
+let config = require('./config');
+var address = config.database.url;// 'couchbase://10.211.55.11';
 
 function newContact(contactToAdd) {
     if (!contactToAdd || (!contactToAdd.eMail && !contactToAdd.idNumber && !contactToAdd.phoneNumber)) {
@@ -12,8 +13,7 @@ function newContact(contactToAdd) {
 
 
     var cluster = new couchbase.Cluster(address);
-    var bucket = cluster.openBucket('IWNContacts');
-    bucket.operationTimeout = 120 * 1000;
+    var bucket = openBucket();
 
 
     contactToAdd.type = 'contact';
@@ -22,33 +22,40 @@ function newContact(contactToAdd) {
     bucket.upsert(getKey(contactToAdd), contactToAdd,
         function (err, result) {
             if (err) {
-                console.error(err);
+                console.error('Error saving contact', err);
             }
+            console.log(result);
 
         });
 }
 
-function getKey(contact){
+function getKey(contact) {
     let key = 'contact_';
-    if (contact.idNumber)
-    {
+    if (contact.idNumber) {
         key += '_' + contact.idNumber;
     }
     else {
         if (contact.phoneNumber) {
             key += '_' + contact.phoneNumber;
         }
-        if (contact.eMail){
+        if (contact.eMail) {
             key += '_' + contact.eMail;
         }
     }
     return key;
 }
 
-function getContacts(callback) {
+function openBucket() {
     var cluster = new couchbase.Cluster(address);
-    var bucket = cluster.openBucket('IWNContacts');
-    bucket.operationTimeout = 120 * 1000;
+    var bucket = cluster.openBucket('IWNContacts', config.database.password);
+    bucket.operationTimeout = 30 * 1000;
+
+    return bucket;
+}
+
+function getContacts(callback) {
+
+    let bucket = openBucket();
 
     var ViewQuery = couchbase.ViewQuery;
 
@@ -60,9 +67,11 @@ function getContacts(callback) {
         if (results) {
             resultsToSend = results.map(item => item.value);
         }
-        resultsToSend.forEach((item, index) => {
-            item.key = results[index].key;
-        });
+        if (resultsToSend) {
+            resultsToSend.forEach((item, index) => {
+                item.key = results[index].key;
+            });
+        }
 
         callback(err, resultsToSend);
     });
@@ -71,8 +80,7 @@ function getContacts(callback) {
 
 function getUserByToken(userToken, callback) {
     var cluster = new couchbase.Cluster(address);
-    var bucket = cluster.openBucket('IWNContacts');
-    bucket.operationTimeout = 120 * 1000;
+    var bucket = openBucket();
     bucket.get(userToken, function (err, result) {
         if (err) {
             console.error(err, userToken);
@@ -84,21 +92,25 @@ function getUserByToken(userToken, callback) {
 
 function saveUser(user, callback) {
     var cluster = new couchbase.Cluster(address);
-    var bucket = cluster.openBucket('IWNContacts');
-    bucket.operationTimeout = 120 * 1000;
+     let bucket = openBucket();
+    bucket.operationTimeout = 30 * 1000;
 
     user.type = 'user';
-    console.log('saveing user', user);
+    console.log('saving user', user);
     bucket.upsert('user_' + user.id, user,
         function (err, result) {
             if (err) {
                 console.error(err);
 
             }
+            else {
+                console.log('user saved successfully')
+            }
             callback(err, result);
 
         });
 }
+
 exports.newContact = newContact;
 exports.getContacts = getContacts;
 exports.getUserByToken = getUserByToken;

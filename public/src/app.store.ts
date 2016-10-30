@@ -14,9 +14,9 @@ export class Store {
     constructor(members:MembersMiddleware, currentUser:UserMiddleware){
         let middlewares = [members.middleware, currentUser.middleware];
        this.store = createStore(RootReducer,
-           applyMiddleware(...middlewares)
+           applyMiddleware(...middlewares));
          //  applyMiddleware(currentUser.middleware)
-           );
+
          //  let store = createStore(reducer, window.devToolsExtension && window.devToolsExtension()););
 
         this.store.subscribe(() => console.log('State',this.state));

@@ -104,7 +104,8 @@ module.exports = function(app, passport, express) {
 // route middleware to ensure user is logged in
     function isLoggedIn(req, res, next) {
 
-        if (req.isAuthenticated()) {
+        let securityModule = require('./auth/securityModule');
+        if (req.isAuthenticated() && securityModule.hasPermission(req.user)) {
             console.log('user', req.user);
             return next();
         }
