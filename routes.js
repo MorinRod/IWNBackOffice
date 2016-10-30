@@ -9,6 +9,7 @@ module.exports = function(app, passport, express) {
         next();
     });
 
+    const clientUrl = '';
 
 
 //This section will hold our Routes
@@ -17,7 +18,7 @@ module.exports = function(app, passport, express) {
     //     app.use('/' + route.path, express.static('public'));
     // });
 
-    app.use('/', express.static('public'));
+    app.use('/', express.static('client/dist'));
     app.use('/members-screen', isLoggedIn, express.static('public'));
     app.use('/register', express.static('public'));
     app.use('/node_modules', express.static('node_modules'));
@@ -93,9 +94,10 @@ module.exports = function(app, passport, express) {
 
     // the callback after google has authenticated the user
     app.get('/auth/google/callback',
+
  passport.authenticate('google', {
-        successRedirect: '/?code=',
-        failureRedirect: '/?code=error'
+        successRedirect: clientUrl +  '/?code=',
+        failureRedirect: clientUrl + '/?code=error'
     }));
 
 

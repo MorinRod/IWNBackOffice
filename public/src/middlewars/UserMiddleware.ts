@@ -11,10 +11,12 @@ export class UserMiddleware{
     private _http:Http;
     private url:string;
     private _router:Router;
+    private baseUrl:string;
 
     constructor(_http:Http, _router:Router){
+        this.baseUrl = 'http://localhost:5000',
         this._http = _http;
-        this.url = '/currentUser';
+        this.url = this.baseUrl +  '/currentUser';
         this._router = _router;
 
     }
@@ -47,7 +49,7 @@ export class UserMiddleware{
                     payload: null
                 })
             };
-            this._http.get('/logout').subscribe(handler, handler);
+            this._http.get(this.baseUrl +  '/logout').subscribe(handler, handler);
         }
         return next(action);
     };
