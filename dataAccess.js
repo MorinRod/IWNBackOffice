@@ -1,6 +1,7 @@
 /**
  * Created by ranwahle on 11/09/2016.
  */
+"use strict";
 
 let couchbase = require('couchbase');
 let config = require('./config');
