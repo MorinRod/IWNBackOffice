@@ -10,11 +10,11 @@ import {RegisterComponent} from "./components/auth/register.component";
 import {WelcomeComponent} from "./components/WelcomeComponent";
 import {SpinnerComponent} from "./components/Spinner";
 import {ContactComponent} from "./components/ContactComponent";
-import {EditContact} from "./components/EditContact";
 import {CommonComponents} from "./commonComponents/commomComponents.module";
 import {Store} from "./app.store";
 import {APP_Middlewars} from "./middlewars/app.middlewars";
 import {APP_ACTIONS} from "./actions/app.actions";
+import {EditContact} from "./components/EditContact/EditContact";
 
 @NgModule({
   declarations: [
