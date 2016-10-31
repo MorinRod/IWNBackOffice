@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "lite": "lite-server",
-     "preinstall": "npm install -g angular-cli",
+     "preinstall": "npm install -g angular-cli@1.0.0-beta.19-3",
     "postinstall": " cd client && ng build --env=prod",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
