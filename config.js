@@ -1,6 +1,7 @@
 /**
  * Created by ranwahle on 10/10/2016.
  */
+"use strict";
 let config = {
     port: 5000,
     security: {
