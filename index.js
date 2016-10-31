@@ -11,9 +11,7 @@ var express = require('express'),
     session = require('express-session'),
     passport = require('passport'),
     flash = require('connect-flash'),
-    LocalStrategy = require('passport-local'),
-    TwitterStrategy = require('passport-twitter'),
-    GoogleStrategy = require('passport-google'),
+
  //  mongoose = require('mongoose'),
     pulsimClient = require('./mailer/pulsimClient');
     FacebookStrategy = require('passport-facebook');
