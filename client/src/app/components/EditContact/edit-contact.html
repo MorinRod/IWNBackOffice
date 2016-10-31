@@ -17,20 +17,6 @@
   <div><input [id]="editedContact.key + '_fromDate'" [labelText]="'מתאריך:'" type="text" name="fromDate" [(ngModel)]="editedContact.fromDate"></div>
   <div><input  [id]="editedContact.key + '_toDate'" [labelText]="'תאריך אחרון לתשלום:'"
                type="text" name="toDate" [(ngModel)]="editedContact.toDate"></div>
-  <!--<div class="col-xs-1" >-->
-  <!--</div>-->
-  <!--<div class="col-xs-1" ><input type="text" placeholder="שם משפחה" [(ngModel)]="editedContact.lastName" name="lastName"/>-->
-  <!--</div>-->
-
-  <!--<div class="col-xs-1" ><input type="email" placeholder="e-mail"  [(ngModel)]="editedContact.eMail" name="email"/>-->
-  <!--</div>-->
-  <!--<div class="col-xs-1 hidden-xs"> <input type="date" name="fromDate" [(ngModel)]="editedContact.fromDate"></div>-->
-  <!--<div class="col-xs-1 hidden-xs"> <input type="date" name="toDate" [(ngModel)]="editedContact.toDate"></div>-->
-  <!--<div class="col-xs-1 hidden-xs"> <input type="text" name="city" [(ngModel)]="editedContact.city"></div>-->
-  <!--<div class="col-xs-1 hidden-xs"> <input type="text" name="address" [(ngModel)]="editedContact.address"></div>-->
-  <!--<div class="col-xs-1 hidden-xs"> <input type="text" name="phoneNumber" [(ngModel)]="editedContact.phoneNumber"></div>-->
-  <!--<div class="col-xs-1 hidden-xs"> <a href="javascript:nvoid(0)" (click)="removeSubscription()">הסרה מרשימות תפוצה</a> </div>-->
-  <!--<div class="col-xs-1 hidden-xs"> <input type="checkbox" name="member" [(ngModel)]="editedContact.member"></div>-->
 
 
   <button type="button" class="glyphicon glyphicon-remove" (click)="revertChanges()"></button>
