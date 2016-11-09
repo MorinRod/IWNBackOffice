@@ -6,7 +6,6 @@
     "start": "node index.js",
     "lite": "lite-server",
      "preinstall": "npm install -g angular-cli@1.0.0-beta.19-3",
-    "postinstall": " cd client && ng build -prod --aot",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings"
