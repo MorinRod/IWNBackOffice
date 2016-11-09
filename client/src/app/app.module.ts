@@ -15,6 +15,9 @@ import {Store} from "./app.store";
 import {APP_Middlewars} from "./middlewars/app.middlewars";
 import {APP_ACTIONS} from "./actions/app.actions";
 import {EditContact} from "./components/EditContact/EditContact";
+import {ContactsComponent} from "./components/contacts.component";
+import {BooleanPipe} from "./pipes/booleanPipe";
+
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import {EditContact} from "./components/EditContact/EditContact";
     WelcomeComponent,
     SpinnerComponent,
     ContactComponent,
+    ContactsComponent,
+    BooleanPipe,
     EditContact
   ],
   imports: [
