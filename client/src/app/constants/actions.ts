@@ -2,24 +2,27 @@
  * Created by ranwahle on 07/09/2016.
  */
 export const Members = {
-    Filter: 'Members_Filter',
-    GetMembers: 'Members_GetMembers',
-    Loaded : 'Members_Loaded',
-    LoadingError: 'Members_LoadingError',
-    SaveMember: 'Members_SaveMember',
-    AddMember: 'Members_AddMember'
+  Filter: 'Members_Filter',
+  GetMembers: 'Members_GetMembers',
+  Loaded: 'Members_Loaded',
+  LoadingError: 'Members_LoadingError',
+  SaveMember: 'Members_SaveMember',
+  AddMember: 'Members_AddMember',
+  PaymentsLoaded: 'Member payments loaded',
+  GetPayments: 'Get member payments',
+  SavePayment: 'Save Payment for member'
 };
 
 
 export const Users = {
-    SetCurrentUser: 'Users_SetCurrentUser',
-    GetCurrentUser: 'Users_GetCurrentUser',
-    CurrentUserLoaded: 'Users_CurrentUserLoaded',
-    LoadingError: 'Users_LoadingError',
-    LogOut: 'Users_LogOut'
+  SetCurrentUser: 'Users_SetCurrentUser',
+  GetCurrentUser: 'Users_GetCurrentUser',
+  CurrentUserLoaded: 'Users_CurrentUserLoaded',
+  LoadingError: 'Users_LoadingError',
+  LogOut: 'Users_LogOut'
 };
 
 export const Server = {
-    OnServerCall: 'Server_OnServerCall',
-    DismissServerCall : 'Server_DismissServerCall'
+  OnServerCall: 'Server_OnServerCall',
+  DismissServerCall: 'Server_DismissServerCall'
 };

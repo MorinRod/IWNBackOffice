@@ -16,13 +16,10 @@ function membersReducer(state, action) {
             return action.payload.slice();
         }
         case actions_1.Members.AddMember: {
+            console.log('state', state);
             return state.concat([action.payload]);
-        }
-        case actions_1.Members.LoadingError: {
-            return Object.assign({}, state, { status: action.payload });
         }
     }
     return [];
 }
 exports.membersReducer = membersReducer;
-//# sourceMappingURL=members.reducer.js.map

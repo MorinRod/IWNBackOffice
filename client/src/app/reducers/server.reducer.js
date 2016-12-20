@@ -16,4 +16,3 @@ function serverReducer(state, action) {
     return state;
 }
 exports.serverReducer = serverReducer;
-//# sourceMappingURL=server.reducer.js.map

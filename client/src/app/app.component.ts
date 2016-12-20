@@ -13,8 +13,10 @@ export class AppComponent  {
   private userActions:UsersActions;
 
   get isLogedIn():boolean{
-    return this._store.state.currentUser &&  this._store.state.currentUser.length
-      && this._store.state.currentUser[this._store.state.currentUser.length - 1]
+
+    return true;
+    // return this._store.state.currentUser &&  this._store.state.currentUser.length
+    //   && this._store.state.currentUser[this._store.state.currentUser.length - 1]
   }
 
   constructor (_store:Store, userActions:UsersActions){

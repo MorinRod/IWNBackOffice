@@ -8,4 +8,3 @@ var Member = (function () {
     return Member;
 }());
 exports.Member = Member;
-//# sourceMappingURL=Member.js.map

@@ -8,7 +8,10 @@ exports.Members = {
     Loaded: 'Members_Loaded',
     LoadingError: 'Members_LoadingError',
     SaveMember: 'Members_SaveMember',
-    AddMember: 'Members_AddMember'
+    AddMember: 'Members_AddMember',
+    PaymentsLoaded: 'Member payments loaded',
+    GetPayments: 'Get member payments',
+    SavePayment: 'Save Payment for member'
 };
 exports.Users = {
     SetCurrentUser: 'Users_SetCurrentUser',
@@ -21,4 +24,3 @@ exports.Server = {
     OnServerCall: 'Server_OnServerCall',
     DismissServerCall: 'Server_DismissServerCall'
 };
-//# sourceMappingURL=actions.js.map

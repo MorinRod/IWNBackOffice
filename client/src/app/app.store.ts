@@ -6,13 +6,14 @@ import {RootReducer} from './reducers/root';
 import {Injectable} from "@angular/core";
 import {UserMiddleware} from "./middlewars/UserMiddleware";
 import {MembersMiddleware} from "./middlewars/MembersMiddleWare";
+import {PaymentsMiddleware} from "./middlewars/PaymentsMiddleware";
 
 @Injectable()
 export class Store {
     private store;
 
-    constructor(members:MembersMiddleware, currentUser:UserMiddleware){
-        let middlewares = [members.middleware, currentUser.middleware];
+    constructor(members:MembersMiddleware, currentUser:UserMiddleware, paymentMiddleware: PaymentsMiddleware){
+        let middlewares = [members.middleware, currentUser.middleware, paymentMiddleware.middleware];
        this.store = createStore(RootReducer,
            applyMiddleware(...middlewares));
          //  applyMiddleware(currentUser.middleware)

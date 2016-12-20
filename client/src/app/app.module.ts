@@ -17,6 +17,8 @@ import {APP_ACTIONS} from "./actions/app.actions";
 import {EditContact} from "./components/EditContact/EditContact";
 import {ContactsComponent} from "./components/contacts.component";
 import {BooleanPipe} from "./pipes/booleanPipe";
+import { MemberPaymentComponent } from './components/member-payment/member-payment.component';
+import { EditPaymentFormComponent } from './components/edit-payment-form/edit-payment-form.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {BooleanPipe} from "./pipes/booleanPipe";
     ContactComponent,
     ContactsComponent,
     BooleanPipe,
-    EditContact
+    EditContact,
+    MemberPaymentComponent,
+    EditPaymentFormComponent
   ],
   imports: [
     BrowserModule,

@@ -22,4 +22,3 @@ function UsersReducer(state, action) {
     return state;
 }
 exports.UsersReducer = UsersReducer;
-//# sourceMappingURL=users.reducer.js.map

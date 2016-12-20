@@ -1,5 +1,6 @@
 import {UsersActions} from "../actions/users.actions";
 import {Users} from "../constants/actions";
+import {Action} from 'redux';
 /**
  * Created by ranwahle on 15/09/2016.
  */

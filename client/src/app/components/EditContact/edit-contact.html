@@ -13,10 +13,10 @@
            [(ngModel)]="editedContact.phoneNumber"></div>
   <div><input [id]="editedContact.key + '_city'" [labelText]="'יישוב:'" type="text" name="city" [(ngModel)]="editedContact.city"></div>
   <div><input [id]="editedContact.key + '_address'" [labelText]="'כתובת:'" type="text" name="address" [(ngModel)]="editedContact.address"></div>
-  <div><input [id]="editedContact.key + '_eMail'" [labelText]="'כתובת דוא&quot;ל:'"  type="text" placeholder="e-mail"  [(ngModel)]="editedContact.eMail" name="email"/></div>
+  <div><input [id]="editedContact.key + '_eMail'" [labelText]="'כתובת דוא&quot;ל:'"  type="text" placeholder="e-mail"  [(ngModel)]="editedContact.emailAddress" name="email"/></div>
   <div><input [id]="editedContact.key + '_fromDate'" [labelText]="'מתאריך:'" type="text" name="fromDate" [(ngModel)]="editedContact.fromDate"></div>
-  <div><input  [id]="editedContact.key + '_toDate'" [labelText]="'תאריך אחרון לתשלום:'"
-               type="text" name="toDate" [(ngModel)]="editedContact.toDate"></div>
+  <!--<div><input  [id]="editedContact.key + '_toDate'" [labelText]="'תאריך אחרון לתשלום:'"-->
+  <!--type="text" name="toDate" [(ngModel)]="editedContact.toDate"></div>-->
 
 
   <button type="button" class="glyphicon glyphicon-remove" (click)="revertChanges()"></button>

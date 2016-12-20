@@ -1,4 +1,5 @@
 import {Server, Members} from "../constants/actions";
+import {Action} from "redux";
 /**
  * Created by ranwahle on 19/09/2016.
  */
