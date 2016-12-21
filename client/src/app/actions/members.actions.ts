@@ -6,6 +6,7 @@ import {Injectable} from "@angular/core";
 import {Store} from "../app.store";
 import {Members} from "../constants/actions";
 import {Payment} from "../models/payment";
+import {Member} from "../models/Member";
 
 @Injectable()
 export class MembersActions {
@@ -39,6 +40,12 @@ export class MembersActions {
     this.store.dispatch({
       type: Members.SaveMember,
       payload: contact
+    });
+  }
+
+  deleteMember(member: Member){
+    this.store.dispatch({type: Members.DeleteMember,
+      payload: member
     });
   }
 

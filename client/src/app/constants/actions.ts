@@ -10,7 +10,10 @@ export const Members = {
   AddMember: 'Members_AddMember',
   PaymentsLoaded: 'Member payments loaded',
   GetPayments: 'Get member payments',
-  SavePayment: 'Save Payment for member'
+  SavePayment: 'Save Payment for member',
+  DeleteMember: 'Delete member',
+  Deleted: 'Member deleted successfully'
+
 };
 
 

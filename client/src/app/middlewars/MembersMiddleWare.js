@@ -33,12 +33,22 @@ var MembersMiddleware = (function () {
                 _this._http.post(_this.url, action.payload)
                     .subscribe(addContactSuccessHandler, errorHandler);
             }
+            else if (action.type === actions_1.Members.DeleteMember) {
+                var deleteMemberSuccessHandler = function (result) {
+                    return next({ type: actions_1.Members.Deleted, payload: action.payload });
+                };
+                var errorHandler = function (error) { return next({
+                    type: actions_1.Members.LoadingError,
+                    payload: error.json()
+                }); };
+                _this._http.delete(_this.url + '/' + action.payload.memberId, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
+            }
             else {
                 return next(action);
             }
         }; }; };
         this._http = _http;
-        this.url = 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+        this.url = 'http://iwndataservices20161217050028.azurewebsites.net/api/members'; // 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
         //  'http://10.0.0.6/IWNDataServices/api/members';
         //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
     }

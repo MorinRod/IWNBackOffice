@@ -20,6 +20,10 @@ export function membersReducer(state = [], action) {
       console.log('state', state);
       return [...state, action.payload];
     }
+
+    case Members.Deleted: {
+      return Object.assign([], state.filter(member => member.memberId !== action.payload.memberId));
+    }
     // case Members.LoadingError:{
     //     return Object.assign({}, state,  {status: action.payload} );
     // }

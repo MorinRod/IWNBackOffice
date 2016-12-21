@@ -19,6 +19,9 @@ function membersReducer(state, action) {
             console.log('state', state);
             return state.concat([action.payload]);
         }
+        case actions_1.Members.Deleted: {
+            return Object.assign([], state.filter(function (member) { return member.memberId !== action.payload.memberId; }));
+        }
     }
     return [];
 }

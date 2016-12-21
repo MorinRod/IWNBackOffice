@@ -37,6 +37,11 @@ var MembersActions = (function () {
             payload: contact
         });
     };
+    MembersActions.prototype.deleteMember = function (member) {
+        this.store.dispatch({ type: actions_1.Members.DeleteMember,
+            payload: member
+        });
+    };
     MembersActions.prototype.addContact = function (contact) {
         this.store.dispatch({
             type: actions_1.Members.AddMember,

@@ -15,7 +15,7 @@ export class MembersMiddleware {
 
     constructor(_http: Http) {
         this._http = _http;
-        this.url =  'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+        this.url = 'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
       //  'http://10.0.0.6/IWNDataServices/api/members';
           //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
 
@@ -103,7 +103,22 @@ export class MembersMiddleware {
 
             this._http.post(this.url, action.payload)
                 .subscribe(addContactSuccessHandler, errorHandler);
+        } else if (action.type === Members.DeleteMember){
+            const deleteMemberSuccessHandler = result => {
+                return next({type: Members.Deleted, payload: action.payload});
+            };
+
+          const errorHandler = error => next({
+            type: Members.LoadingError,
+            payload: error.json()
+          });
+          this._http.delete(this.url + '/' + action.payload.memberId, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
+
+
+
+
         }
+
 
         else {
             return next(action);

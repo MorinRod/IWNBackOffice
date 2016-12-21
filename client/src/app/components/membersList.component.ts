@@ -38,7 +38,9 @@ import {Member} from "../models/Member";
 <div class="col-xs-1" *ngIf="!member.isEdited" >
 <a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה"
  (click)="editContact(member)"></a>
+ <a class="glyphicon glyphicon-erase" title="מחיקה" (click)="deleteMember(member)"></a>
  </div>
+ 
 <edit-contact *ngIf="member.isEdited" [editedContact]="member"></edit-contact>
 </div>
 
@@ -62,6 +64,10 @@ export class MembersListComponent implements OnInit{
 
 
     }
+
+  deleteMember(member: Member){
+      this.memberActions.deleteMember(member);
+  }
 
     addNewContact(){
         let member = new Member();
