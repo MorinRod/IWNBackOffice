@@ -21,8 +21,8 @@ body {
 
 div.col-xs-1,
 div.col-xs-2{
-  max-height:14px;
-  min-height:14px;
+  max-height:16px;
+  min-height:16px;
 }
 
 .spacerDiv{
@@ -34,7 +34,7 @@ contact-component .col-xs-1,
 contact-component .col-xs-2,
 edit-contact input
 {
-  font-size:10px;
+  font-size:14px;
   border-bottom-width:1px;
   border-bottom-style: solid;
   overflow: hidden;
@@ -43,4 +43,7 @@ edit-contact input
 
 edit-contact input{
   max-width: 100%;
+}
+.highlight {
+  background-color: yellow;
 }

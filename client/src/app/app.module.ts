@@ -19,6 +19,9 @@ import {ContactsComponent} from "./components/contacts.component";
 import {BooleanPipe} from "./pipes/booleanPipe";
 import { MemberPaymentComponent } from './components/member-payment/member-payment.component';
 import { EditPaymentFormComponent } from './components/edit-payment-form/edit-payment-form.component';
+import { PagingPipePipe } from './pipes/paging-pipe.pipe';
+import { SearchPipePipe } from './pipes/search-pipe.pipe';
+import { HilightPipe } from './pipes/hilight.pipe';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import { EditPaymentFormComponent } from './components/edit-payment-form/edit-pa
     BooleanPipe,
     EditContact,
     MemberPaymentComponent,
-    EditPaymentFormComponent
+    EditPaymentFormComponent,
+    PagingPipePipe,
+    SearchPipePipe,
+    HilightPipe
   ],
   imports: [
     BrowserModule,

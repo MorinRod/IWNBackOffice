@@ -4,7 +4,7 @@
 export class Member{
     firstName:string;
     lastName: string;
-    eMail: string;
+    emailAddress: string;
     address: string;
     idNumber: string;
     member: boolean;
