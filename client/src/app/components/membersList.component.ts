@@ -38,7 +38,7 @@ import {SearchPipePipe} from "../pipes/search-pipe.pipe";
 <!--<div class="col-xs-1 header-row">מעוניינת להצטרף</div>-->
 </div>
 <div class="spacerDiv"></div>
-
+<edit-contact *ngIf="newContact && newContact.isEdited" [editedContact]="newContact"></edit-contact>
 <div class="row" *ngFor="let member of filteredMembers | pagingPipe:from:from+itemsInPage; let index = index ">
 
 <contact-component *ngIf="member && !member.isEdited" [index]="from + index" [hilightWord]="searchWord" [contact]="member"></contact-component>
@@ -48,10 +48,10 @@ import {SearchPipePipe} from "../pipes/search-pipe.pipe";
  <a class="glyphicon glyphicon-erase" title="מחיקה" (click)="deleteMember(member)"></a>
  </div>
  
-<edit-contact *ngIf="member.isEdited" [editedContact]="member"></edit-contact>
+<edit-contact *ngIf="member.isEdited && member !== newContact" [editedContact]="member"></edit-contact>
 </div>
 
-<edit-contact *ngIf="newContact" [editedContact]="_store.state.newContact"></edit-contact>
+
 </div>
 `
 
@@ -103,6 +103,9 @@ export class MembersListComponent implements OnInit {
     let member = new Member();
     member.isEdited = true;
     this.memberActions.addContact(member);
+
+    this.newContact = member;
+
   }
 
   getContacts() {
