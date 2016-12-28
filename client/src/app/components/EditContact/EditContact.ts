@@ -18,7 +18,7 @@ export class EditContact {
     constructor(menbersActions: MembersActions) {
 
         this.menbersActions = menbersActions;
-        this.editedContact = new Member();
+
 
     }
 
@@ -27,6 +27,7 @@ export class EditContact {
     }
 
     revertChanges(){
+        this.editedContact.isEdited = false;
         this.menbersActions.getContacts();
     }
 

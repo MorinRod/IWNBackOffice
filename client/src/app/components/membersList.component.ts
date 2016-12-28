@@ -11,6 +11,7 @@ import {SearchPipePipe} from "../pipes/search-pipe.pipe";
 
   template: `<h2>רשימת חברים 
 ( {{filteredMembers.length}} / {{_store.state.members ? _store.state.members.length : 0}}  )</h2>
+
 <a class="glyphicon glyphicon-plus" href="javascript:void(0)" 
 (click)="addNewContact()" title="חדש" ></a>
 <label for="searchBox">חיפוש חפשי:</label>
@@ -30,10 +31,14 @@ import {SearchPipePipe} from "../pipes/search-pipe.pipe";
 <div class="col-xs-2 header-row">e-mail</div>
 <div class="col-xs-1 header-row hidden-xs">תאריך הצטרפות</div>
 <div class="col-xs-1 header-row hidden-xs" >תאריך אחרון לתשלום</div>
+<a class="glyphicon glyphicon-fast-forward" href="javascript:void(0)" (click)="moveFastBackwards()" *ngIf="from > 0"></a>
+
 <a class="glyphicon glyphicon-step-forward" href="javascript:void(0)" (click)="moveBackwards()" *ngIf="from > 0"></a>
 <a class="glyphicon glyphicon-step-backward" href="javascript:void(0)" (click)="moveForward()"
  *ngIf="from + itemsInPage < filteredMembers.length"></a>
-
+ <a class="glyphicon glyphicon-fast-backward" href="javascript:void(0)" (click)="moveFastForward()"
+ *ngIf="from + itemsInPage < filteredMembers.length"></a>
+{{from + 1}} - {{ to }}
 <!--<div class="col-xs-1 header-row">מעוניינת בעדכונים</div>-->
 <!--<div class="col-xs-1 header-row">מעוניינת להצטרף</div>-->
 </div>
@@ -78,17 +83,31 @@ export class MembersListComponent implements OnInit {
 
   }
 
-  private get filteredMembers(): Member[]{
-      return new SearchPipePipe().transform( this._store.state.members,
-        this.searchWord);
+  private get filteredMembers(): Member[] {
+    return new SearchPipePipe().transform(this._store.state.members,
+      this.searchWord);
+  }
+
+  private get to(): number {
+    return Math.min(this.from + this.itemsInPage, this.filteredMembers.length);
   }
 
   searchKeyPressed() {
     this.from = 0;
   }
 
+  moveFastForward() {
+
+    const length = this.filteredMembers.length;
+    this.from = length - (length % this.itemsInPage);
+  }
+
   moveForward() {
     this.from += this.itemsInPage;
+  }
+
+  moveFastBackwards() {
+    this.from = 0;
   }
 
   moveBackwards() {
