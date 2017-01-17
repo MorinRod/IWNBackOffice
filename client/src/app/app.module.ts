@@ -22,6 +22,8 @@ import { EditPaymentFormComponent } from './components/edit-payment-form/edit-pa
 import { PagingPipePipe } from './pipes/paging-pipe.pipe';
 import { SearchPipePipe } from './pipes/search-pipe.pipe';
 import { HilightPipe } from './pipes/hilight.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { SortArrowDirective } from './directives/sort-arrow.directive';
 
 
 @NgModule({
@@ -39,7 +41,10 @@ import { HilightPipe } from './pipes/hilight.pipe';
     EditPaymentFormComponent,
     PagingPipePipe,
     SearchPipePipe,
-    HilightPipe
+    HilightPipe,
+    OrderByPipe,
+    SortArrowDirective,
+    SortArrowDirective
   ],
   imports: [
     BrowserModule,

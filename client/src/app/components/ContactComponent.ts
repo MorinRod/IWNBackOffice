@@ -12,7 +12,7 @@ import {Member} from "../models/Member";
 <div class="col-xs-1"  [innerHTML]="contact.idNumber | hilight:hilightWord"></div>
 <div class="col-xs-1 hidden-xs" [innerHTML]="contact.phoneNumber | hilight:hilightWord"></div>
 <div class="col-xs-1 hidden-xs"  [innerHTML]="contact.city | hilight:hilightWord"></div>
-<div class="col-xs-1 hidden-xs"  [innerHTML]="contact.adress | hilight:hilightWord"></div>
+<div class="col-xs-1 hidden-xs"  [innerHTML]="contact.address | hilight:hilightWord"></div>
 <div class="col-xs-2" [innerHTML]="contact.emailAddress | hilight:hilightWord"></div>
 <div class="col-xs-1 hidden-xs">&nbsp;{{contact.fromDate}}</div>
 <div class="col-xs-1 hidden-xs" >&nbsp;{{contact.toDate}}</div>
