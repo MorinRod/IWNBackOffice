@@ -18,10 +18,10 @@ export const appRoutingProviders: any[] = [];
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
 
 
-export class RoutesPaths {
-  public paths: string[];
+// export class RoutesPaths {
+//   public paths: string[];
 
-  constructor() {
-    this.paths = appRoutes.map(route => route.path);
-  }
-}
+//   constructor() {
+//     this.paths = appRoutes.map(route => route.path);
+//   }
+// }
