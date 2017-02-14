@@ -1,18 +1,21 @@
-import {Component, OnInit, ChangeDetectorRef} from "@angular/core";
-import {Store} from "../app.store";
-import {MembersActions} from "../actions/members.actions";
-import {Member} from "../models/Member";
-import {SearchPipePipe} from "../pipes/search-pipe.pipe";
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Store } from "../app.store";
+import { MembersActions } from "../actions/members.actions";
+import { Member } from "../models/Member";
+import { SearchPipePipe } from "../pipes/search-pipe.pipe";
 /**
  * Created by ranwahle on 07/09/2016.
  */
 @Component({
   selector: 'contacts-list-component',
 
-  template: `<h2>רשימת חברים 
-( {{filteredMembers.length}} / {{_store.state.members ? _store.state.members.length : 0}}  )</h2>
+  template: `<h2>רשימת חברים
+<span *ngIf="filteredMembers">( {{filteredMembers.length}} / {{_store.state.members ? _store.state.members.length : 0}}  )
+</span>
 
-<a class="glyphicon glyphicon-plus" href="javascript:void(0)" 
+</h2>
+
+<a class="glyphicon glyphicon-plus" href="javascript:void(0)"
 (click)="addNewContact()" title="חדש" ></a>
 <label for="searchBox">חיפוש חפשי:</label>
 <input type="text" id="searchBox" placeholder="חיפוש חפשי" [(ngModel)]="searchWord" name="searchWord" (keypress)="searchKeyPressed()">
@@ -59,9 +62,9 @@ e-mail
 
 <a class="glyphicon glyphicon-step-forward" href="javascript:void(0)" (click)="moveBackwards()" *ngIf="from > 0"></a>
 <a class="glyphicon glyphicon-step-backward" href="javascript:void(0)" (click)="moveForward()"
- *ngIf="from + itemsInPage < filteredMembers.length"></a>
+ *ngIf="filteredMembers &&  from + itemsInPage < filteredMembers.length"></a>
  <a class="glyphicon glyphicon-fast-backward" href="javascript:void(0)" (click)="moveFastForward()"
- *ngIf="from + itemsInPage < filteredMembers.length"></a>
+ *ngIf="filteredMembers && from + itemsInPage < filteredMembers.length"></a>
 {{from + 1}} - {{ to }}
 <!--<div class="col-xs-1 header-row">מעוניינת בעדכונים</div>-->
 <!--<div class="col-xs-1 header-row">מעוניינת להצטרף</div>-->
@@ -76,7 +79,7 @@ e-mail
  (click)="editContact(member)"></a>
  <a class="glyphicon glyphicon-erase" title="מחיקה" (click)="deleteMember(member)"></a>
  </div>
- 
+
 <edit-contact *ngIf="member.isEdited && member !== newContact" [editedContact]="member"></edit-contact>
 </div>
 
@@ -117,14 +120,16 @@ export class MembersListComponent implements OnInit {
   }
 
   private get to(): number {
+    if (! this.filteredMembers){
+      return 0;
+    }
     return Math.min(this.from + this.itemsInPage, this.filteredMembers.length);
   }
 
   sortBy(key: string) {
-    if (this.sortKey === key){
+    if (this.sortKey === key) {
       this.sortKey = '-' + key;
-    }
-    else {
+    }    else {
       this.sortKey = key;
     }
 
