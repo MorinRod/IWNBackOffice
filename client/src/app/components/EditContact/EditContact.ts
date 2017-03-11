@@ -12,12 +12,11 @@ import {Member} from "../../models/Member";
 })
 export class EditContact {
 
-     private menbersActions: MembersActions;
     @Input() editedContact: Member
 
-    constructor(menbersActions: MembersActions) {
+    constructor(private memberActions: MembersActions) {
 
-        this.menbersActions = menbersActions;
+
 
 
     }
@@ -28,10 +27,11 @@ export class EditContact {
 
     revertChanges(){
         this.editedContact.isEdited = false;
-        this.menbersActions.getContacts();
+        this.memberActions.getContacts();
     }
 
     addNewContact() {
-        this.menbersActions.saveContact(this.editedContact);
+        this.memberActions.saveContact(this.editedContact);
+        this.editedContact.isEdited = false;
     }
 }
