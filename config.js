@@ -8,8 +8,8 @@ let config = {
         defaultAdminId: 'google_102180803478740486911'
     },
     database: {
-        url: 'couchbase://13.79.36.80:?detailed_errcodes=1', //couchbase://10.211.55.11' couchbase://13.79.36.80
-        password: 'IWNpass'
+        url: 'couchbase://localhost:8091', //couchbase://10.211.55.11' couchbase://13.79.36.80
+        password: 'RomEl213'
     }
 };
 

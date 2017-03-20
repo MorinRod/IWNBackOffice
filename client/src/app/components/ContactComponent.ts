@@ -17,7 +17,7 @@ import {Member} from "../models/Member";
 <div class="col-xs-1 hidden-xs">&nbsp;{{contact.fromDate}}</div>
 <div class="col-xs-1 hidden-xs" >&nbsp;{{contact.toDate}}</div>
 
-<div class="col-xs-1"><a [routerLink]="['/payment', contact.memberId]">תשלומים</a></div>
+<div class="col-xs-1"><a [routerLink]="['/payment', contact.idNumber]">תשלומים</a></div>
 
 <!--<div class="col-xs-1" [innerHTML]="contact.wantUpdates | booleanpipe"></div>-->
 <!--<div class="col-xs-1" [innerHTML]="contact.member | booleanpipe"></div>-->

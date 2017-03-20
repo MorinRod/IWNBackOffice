@@ -2,38 +2,31 @@
 /**
  * Created by ranwahle on 13/09/2016.
  */
-module.exports = function(app, passport, express) {
+
+
+module.exports = function(app, passport, express, authenticate) {
+
     app.use(function (req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Authorization');
         next();
     });
-
+    app.use(authenticate);
     const clientUrl = '';
 
-
+    console.log("========== exports =================")
 //This section will hold our Routes
 
-    // routes.RoutesPaths.paths.forEach(route => {
-    //     app.use('/' + route.path, express.static('public'));
-    // });
 
     app.use('/', express.static('client/dist'));
-    app.use('/members-screen', isLoggedIn, express.static('public'));
     app.use('/register', express.static('public'));
     app.use('/node_modules', express.static('node_modules'));
-// app.get('/', function(req, res) {
-//     res.send('hello world');
-// });
 
-    app.get('/currentUser', isLoggedIn, function (req, response) {
-        if (req.user.value.google){
-            response.send(req.user.value.google);
-        }
-        else if (req.user.value.facebook){
-            response.send(req.user.value.facebook);
-        }
 
+    app.get('/currentUser', function (req, response) {
+        //todo:return user profile details
+
+        response.json({ message: "Hello from a private endpoint! You DO need to be authenticated to see this." });
     });
 
     app.get('/getUnsubscribedMails', function(req, res){
@@ -52,17 +45,18 @@ module.exports = function(app, passport, express) {
         res.send({});
     })
 
-    app.get('/contacts',isLoggedIn, function (req, res) {
+    app.get('/members-screen/contacts', function (req, res) {
         var dataAccess = require('./dataAccess');
         dataAccess.getContacts(function (err, results) {
             console.log('error', err);
             console.log('results', results);
             res.send(results);
         });
-        // res.send( [{firstName: 'Ran', lastName: 'Wahle'
-        // , eMail: 'ran.wahle@gmail.com'}]);
     });
-    app.post('/contacts', function (req, res) {
+
+    app.post('/members-screen/contacts', function (req, res) {
+        console.log(req.body);
+        
         try {
             var dataAccess = require('./dataAccess');
 

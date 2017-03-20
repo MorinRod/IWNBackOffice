@@ -48,7 +48,8 @@ var MembersMiddleware = (function () {
             }
         }; }; };
         this._http = _http;
-        this.url = 'http://iwndataservices20161217050028.azurewebsites.net/api/members'; // 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+        this.url = 'https://localhost:5000/members-screen'
+        //'http://iwndataservices20161217050028.azurewebsites.net/api/members'; // 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
         //  'http://10.0.0.6/IWNDataServices/api/members';
         //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
     }

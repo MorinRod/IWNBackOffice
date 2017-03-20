@@ -2,6 +2,9 @@ import {Users} from "../constants/actions";
 import {Http} from "@angular/http";
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
+import {configuration} from '../constants/configuration';
+import { AuthHttp }  from 'angular2-jwt';
+
 /**
  * Created by ranwahle on 14/09/2016.
  */
@@ -13,8 +16,8 @@ export class UserMiddleware{
   private _router:Router;
   private baseUrl:string;
 
-  constructor(_http:Http, _router:Router){
-    this.baseUrl = 'http://localhost:5000',
+  constructor(_http:Http, _router:Router,private authHttp: AuthHttp,){
+    this.baseUrl = configuration.devUrl,
       this._http = _http;
     this.url = this.baseUrl +  '/currentUser';
     this._router = _router;
@@ -37,7 +40,7 @@ export class UserMiddleware{
         type   : Users.LoadingError,
         payload: null
       });
-      this._http.get(this.url).subscribe(successHandler, errorHandler);
+      this.authHttp.get(this.url).subscribe(successHandler, errorHandler);
     }
 
     else if (action.type === Users.LogOut){
@@ -49,7 +52,7 @@ export class UserMiddleware{
           payload: null
         })
       };
-      this._http.get(this.baseUrl +  '/logout').subscribe(handler, handler);
+      this.authHttp.get(this.baseUrl +  '/logout').subscribe(handler, handler);
     }
     return next(action);
   };

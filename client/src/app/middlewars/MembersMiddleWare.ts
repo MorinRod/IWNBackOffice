@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Server, Members, Users} from '../constants/actions';
-import {Http} from "@angular/http";
+import {configuration} from '../constants/configuration';
+import {Http,RequestOptions,Headers} from "@angular/http";
+import { AuthHttp }  from 'angular2-jwt';
 
 
 /**
@@ -10,15 +12,16 @@ import {Http} from "@angular/http";
 export class MembersMiddleware {
 
     private _http: Http;
+    private _requestOptionsArgs:string;
     private url: string;
+    private headers:Headers;
 
-
-    constructor(_http: Http) {
+    constructor(_http: Http,private authHttp: AuthHttp) {
         this._http = _http;
-        this.url = 'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+        this.url = //'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
       //  'http://10.0.0.6/IWNDataServices/api/members';
           //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
-
+          configuration.devUrl
     }
 
     setChangedMember(store, savedMember){
@@ -71,7 +74,7 @@ export class MembersMiddleware {
               });
           }
 
-          this._http.get(this.url).subscribe(successHandler, errorHandler);
+          this.authHttp.get(this.url+'/contacts').subscribe(successHandler, errorHandler);
           return next({type: Server.OnServerCall});
 
       }
@@ -97,11 +100,12 @@ export class MembersMiddleware {
             };
 
             const errorHandler = error => next({
-                type: Members.LoadingError,
-                payload: error.json()
+                type: Members.LoadingError
+                //payload: error.json()
             });
-
-            this._http.post(this.url, action.payload)
+        console.log("url is: "+this.url);
+        console.log(action.type);
+            this.authHttp.post(this.url+'/contacts', action.payload)
                 .subscribe(addContactSuccessHandler, errorHandler);
         } else if (action.type === Members.DeleteMember){
             const deleteMemberSuccessHandler = result => {
@@ -112,7 +116,7 @@ export class MembersMiddleware {
             type: Members.LoadingError,
             payload: error.json()
           });
-          this._http.delete(this.url + '/' + action.payload.memberId, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
+          this.authHttp.delete(this.url + '/' + action.payload.memberId, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
 
 
 
