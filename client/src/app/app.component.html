@@ -4,11 +4,12 @@
 
    שלום   {{_store.state.currentUser[0].name}}
 </span>
-
+<div class="navbar-header">
+  <button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+  <button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+  </div>
 <nav>
-  <a *ngIf="isLogedIn " [routerLink]="['/members-screen']">חברים</a>
-  <a *ngIf="!isLogedIn" [routerLink]="['/login']">התחברות</a>
-  <!--<a *ngIf= "isLogedIn" href="javascript:void(0)" (click)="userActions.logOut()">התנתקות</a>-->
+  <a *ngIf="auth.authenticated()" [routerLink]="['/members-screen']">חברים</a>
 </nav>
 <spinner *ngIf="_store.state.OnServerCall.loading"></spinner>
 <router-outlet></router-outlet>

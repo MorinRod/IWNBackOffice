@@ -8,19 +8,22 @@ let config = require('./config');
 var address = config.database.url;// 'couchbase://10.211.55.11';
 
 function newContact(contactToAdd) {
+    
     if (!contactToAdd || (!contactToAdd.eMail && !contactToAdd.idNumber && !contactToAdd.phoneNumber)) {
         throw 'Missing contact Id number';
-    }
-
+        }
 
     var cluster = new couchbase.Cluster(address);
-    var bucket = openBucket();
-
+    var bucket = cluster.openBucket('IWNContacts',config.database.password,function(err, result) {
+        if (err) {
+                console.error('Error connecting db', err);
+            }
+    });
 
     contactToAdd.type = 'contact';
-
     console.log('contact to add', contactToAdd);
-    bucket.upsert(getKey(contactToAdd), contactToAdd,
+
+     bucket.upsert(getKey(contactToAdd), contactToAdd,
         function (err, result) {
             if (err) {
                 console.error('Error saving contact', err);
@@ -31,7 +34,7 @@ function newContact(contactToAdd) {
 }
 
 function getKey(contact) {
-    let key = 'contact_';
+    let key = 'contact';
     if (contact.idNumber) {
         key += '_' + contact.idNumber;
     }
@@ -47,11 +50,19 @@ function getKey(contact) {
 }
 
 function openBucket() {
-    var cluster = new couchbase.Cluster(address);
-    var bucket = cluster.openBucket('IWNContacts', config.database.password);
-    bucket.operationTimeout = 30 * 1000;
+    try {
+        console.log("-------- open bucket -------")
+        var cluster = new couchbase.Cluster(address);
+        var bucket = cluster.openBucket('IWNContacts', config.database.password);
+        bucket.operationTimeout = 30 * 1000;
 
-    return bucket;
+        return bucket;
+    
+    } catch(e) {
+        // statements
+        console.log(e);
+    }
+    
 }
 
 function getContacts(callback) {
@@ -60,7 +71,7 @@ function getContacts(callback) {
 
     var ViewQuery = couchbase.ViewQuery;
 
-    var query = ViewQuery.from('contacts', 'contacts');
+    var query = ViewQuery.from('dev_contacts', 'contacts');
 
     bucket.query(query, function (err, results) {
         var resultsToSend = null;

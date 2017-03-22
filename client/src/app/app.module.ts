@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule,JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routes';
@@ -24,7 +24,16 @@ import { HilightPipe } from './pipes/hilight.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SortArrowDirective } from './directives/sort-arrow.directive';
 import { MemberPaymentComponent } from './components/member-payment/member-payment.component';
+import { AUTH_PROVIDERS }      from 'angular2-jwt';
+import { Http, RequestOptions } from '@angular/http';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenName: 'id_token',
+  }), http, options);
+}
 
 
 @NgModule({
@@ -60,10 +69,16 @@ import { MemberPaymentComponent } from './components/member-payment/member-payme
     BrowserModule,
     FormsModule,
     HttpModule,
+    JsonpModule,
     routing,
     CommonComponents
   ],
-  providers: [Store, ...APP_ACTIONS, ...APP_Middlewars],
+  providers: [Store, ...APP_ACTIONS, ...APP_Middlewars
+  ,{
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

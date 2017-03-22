@@ -3,5 +3,6 @@
  */
 
 export const configuration = {
-  baseUrl: ''
+  baseUrl: 'http://iwndataservices20161217050028.azurewebsites.net/api/members',
+  devUrl:'http://localhost:5000/members-screen'
 }

@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Server, Members, Users} from "../constants/actions";
 import {Payment} from "../models/payment";
+import { AuthHttp }  from 'angular2-jwt';
 
 /**
  * Created by ranwahle on 19/12/2016.
@@ -13,7 +14,7 @@ export class PaymentsMiddleware {
 
   private url: string;
 
-  constructor(private http: Http) {
+  constructor(private http: Http,private authHttp:AuthHttp) {
     this.url = 'http://iwndataservices20161217050028.azurewebsites.net/api/payments';//http://10.0.0.6/IWNDataServices/api/payments';
   }
 
@@ -87,7 +88,7 @@ export class PaymentsMiddleware {
       });
     }
 
-    this.http.get(this.url + '/' + action.payload.memberId).subscribe(successHandler, errorHandler);
+    this.authHttp.get(this.url + '/' + action.payload.memberId).subscribe(successHandler, errorHandler);
     return next({type: Server.OnServerCall});
 
   }
