@@ -15,7 +15,7 @@ import {Member} from "../models/Member";
 <div class="col-xs-1 hidden-xs"  [innerHTML]="contact.address | hilight:hilightWord"></div>
 <div class="col-xs-2" [innerHTML]="contact.emailAddress | hilight:hilightWord"></div>
 <div class="col-xs-1 hidden-xs">&nbsp;{{contact.fromDate}}</div>
-<div class="col-xs-1 hidden-xs" >&nbsp;{{contact.toDate}}</div>
+<div class="col-xs-1 hidden-xs" >{{contact.toDate | date:'dd/MM/yy'}}</div>
 
 <div class="col-xs-1"><a [routerLink]="['/payment', contact.idNumber]">תשלומים</a></div>
 

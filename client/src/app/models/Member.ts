@@ -9,6 +9,7 @@ export class Member {
   idNumber: string;
   member: boolean;
   wantUpdates: boolean;
+  memberId: number;
   txId: string;
   city: string;
   phoneNumber: string;
