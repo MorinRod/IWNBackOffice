@@ -15,8 +15,8 @@ body {
 }
 
 .header-row{
-  background-color: azure;
-  font-size:10px;
+  font-size:13px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 div.col-xs-1,
@@ -46,4 +46,45 @@ edit-contact input{
 }
 .highlight {
   background-color: yellow;
+}
+
+.jumbotron{
+    width: 25%;
+    margin-right: 5%;
+    margin-top: 1%;
+    background-color: #abe1e6;
+    padding-top: 1%;
+}
+
+.row{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #eee;
+    background-color: rgba(86,61,124,.15);
+    border: 1px solid #ddd;
+    border: 1px solid rgba(86,61,124,.2);
+}
+
+.container {
+    width: 95%;
+    padding-left: 0px;
+    margin-right: 2%;
+    margin-left: 1%;
+}
+
+.btn-login{
+    float: left;
+    margin-top: 0.7%;
+}
+
+.members-list{
+  margin-top: 70px;
+}
+
+.first{
+  margin-top: 1%;
+}
+
+.bold{
+  font-weight: bold;
 }
