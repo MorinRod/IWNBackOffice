@@ -12,11 +12,11 @@ import {Member} from "../../models/Member";
 })
 export class EditContact {
 
-  private membersActions: MembersActions;
+     private membersActions: MembersActions;
     @Input() editedContact: Member
 
     constructor(private memberActions: MembersActions) {
-      private membersActions: MembersActions;
+      this.membersActions=memberActions;
     }
 
     removeSubscription() {

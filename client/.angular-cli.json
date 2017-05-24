@@ -18,10 +18,10 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "mobile": false,
-      "styles": [
-        "styles.css",
+      "styles": [      
         "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/bootstrap-rtl/dist/css/bootstrap-rtl.css"
+        "../node_modules/bootstrap-rtl/dist/css/bootstrap-rtl.css",
+        "styles.css"
 
       ],
       "scripts": [],

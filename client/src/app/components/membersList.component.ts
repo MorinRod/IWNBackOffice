@@ -8,85 +8,7 @@ import { SearchPipePipe } from "../pipes/search-pipe.pipe";
  */
 @Component({
   selector: 'contacts-list-component',
-
-  template: `<h2>רשימת חברים
-<span *ngIf="filteredMembers">( {{filteredMembers.length}} / {{_store.state.members ? _store.state.members.length : 0}}  )
-</span>
-
-</h2>
-
-<a class="glyphicon glyphicon-plus" href="javascript:void(0)"
-(click)="addNewContact()" title="חדש" ></a>
-<label for="searchBox">חיפוש חפשי:</label>
-<input type="text" id="searchBox" placeholder="חיפוש חפשי" [(ngModel)]="searchWord" name="searchWord" (keypress)="searchKeyPressed()">
-
-<button (click)="getContacts()" class="glyphicon glyphicon-refresh">טעינה</button>
-<div *ngIf="_store.state.members && _store.state.members.length">
-<div class="row" >
-<!--<div class="col-xs-1 header-row">מספר סידורי</div>-->
-<div class="col-xs-1 header-row"><a  [appSortArrow]="'firstName'" [currentKeyWord]="sortKey" (click)="sortBy('firstName')" href="javascript:void(0)"> שם פרטי</a></div>
-<div class="col-xs-1 header-row">
-<a  [appSortArrow]="'lastName'" [currentKeyWord]="sortKey" (click)="sortBy('lastName')" href="javascript:void(0)">
-שם משפחה
-</a>
-</div>
-<div class="col-xs-1 header-row">
-<a  [appSortArrow]="'idNumber'" [currentKeyWord]="sortKey" (click)="sortBy('idNumber')" href="javascript:void(0)">
-תעודת זהות
-</a>
-</div>
-<div class="col-xs-1 header-row hidden-xs">
-<a  [appSortArrow]="'phoneNumber'" [currentKeyWord]="sortKey" (click)="sortBy('phoneNumber')" href="javascript:void(0)">
-טלפון
-</a>
-</div>
-<div class="col-xs-1 header-row hidden-xs">
-<a  [appSortArrow]="'city'" [currentKeyWord]="sortKey" (click)="sortBy('city')" href="javascript:void(0)">
-יישוב
-</a>
-</div>
-<div class="col-xs-1 header-row hidden-xs">
-<a  [appSortArrow]="'address'" [currentKeyWord]="sortKey" (click)="sortBy('address')" href="javascript:void(0)">
-כתובת
-</a>
-</div>
-
-<div class="col-xs-2 header-row">
-<a  [appSortArrow]="'emailAddress'" [currentKeyWord]="sortKey" (click)="sortBy('emailAddress')" href="javascript:void(0)">
-e-mail
-</a>
-</div>
-<div class="col-xs-1 header-row hidden-xs">תאריך הצטרפות</div>
-<div class="col-xs-1 header-row hidden-xs" >תאריך אחרון לתשלום</div>
-<a class="glyphicon glyphicon-fast-forward" href="javascript:void(0)" (click)="moveFastBackwards()" *ngIf="from > 0"></a>
-
-<a class="glyphicon glyphicon-step-forward" href="javascript:void(0)" (click)="moveBackwards()" *ngIf="from > 0"></a>
-<a class="glyphicon glyphicon-step-backward" href="javascript:void(0)" (click)="moveForward()"
- *ngIf="filteredMembers &&  from + itemsInPage < filteredMembers.length"></a>
- <a class="glyphicon glyphicon-fast-backward" href="javascript:void(0)" (click)="moveFastForward()"
- *ngIf="filteredMembers && from + itemsInPage < filteredMembers.length"></a>
-{{from + 1}} - {{ to }}
-<!--<div class="col-xs-1 header-row">מעוניינת בעדכונים</div>-->
-<!--<div class="col-xs-1 header-row">מעוניינת להצטרף</div>-->
-</div>
-<div class="spacerDiv"></div>
-<edit-contact *ngIf="newContact && newContact.isEdited" [editedContact]="newContact"></edit-contact>
-<div class="row" *ngFor="let member of filteredMembers | orderBy: [sortKey] | pagingPipe:from:from+itemsInPage; let index = index ">
-
-<contact-component *ngIf="member && !member.isEdited" [index]="from + index" [hilightWord]="searchWord" [contact]="member"></contact-component>
-<div class="col-xs-1" *ngIf="!member.isEdited" >
-<a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה"
- (click)="editContact(member)"></a>
- <a class="glyphicon glyphicon-erase" title="מחיקה" (click)="deleteMember(member)"></a>
- </div>
-
-<edit-contact *ngIf="member.isEdited && member !== newContact" [editedContact]="member"></edit-contact>
-</div>
-
-
-</div>
-`
-
+  templateUrl: './membersList.component.html'
 })
 export class MembersListComponent implements OnInit {
   private sortKey: string;
@@ -176,6 +98,7 @@ export class MembersListComponent implements OnInit {
 
   editContact(member) {
     member.isEdited = true;
+    this.newContact = member;
   }
 
 }

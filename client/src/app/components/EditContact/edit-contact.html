@@ -1,26 +1,31 @@
-<form (submit)="addNewContact()" *ngIf="editedContact" style="margin:20px;">
-  <div>
-    <input [labelText]="'שם פרטי:'" [id]="editedContact.key + '_firstName'"  type="text" placeholder="שם פרטי" [(ngModel)]="editedContact.firstName" name="firstName"/>
-  </div>
+<div class="jumbotron">
+  <form #form="ngForm" (submit)="addNewContact()" *ngIf="editedContact" style="margin:20px;">
+    <div class="form-group">
+      <input [labelText]="'שם פרטי:'" [id]="editedContact.key + '_firstName'"  type="text" class="form-control" placeholder="שם פרטי" [(ngModel)]="editedContact.firstName" name="firstName" required pattern="[a-zA-Z\u0590-\u05fe]+$"/>
+    </div>
 
-  <div><label [attr.for]="editedContact.key + '_lastName'">שם משפחה:</label>
-    <input [id]="editedContact.key + '_lastName'" type="text" placeholder="שם משפחה" [(ngModel)]="editedContact.lastName" name="lastName"/></div>
-  <div>
+    <div class="form-group">
+    <label [attr.for]="editedContact.key + '_lastName'">שם משפחה:</label>
+      <input [id]="editedContact.key + '_lastName'" type="text" class="form-control" placeholder="שם משפחה" [(ngModel)]="editedContact.lastName" name="lastName" required pattern="[a-zA-Z\u0590-\u05fe]?\-+$" /></div>
+    <div class="form-group">
 
-    <input [labelText]="'מספר תעודת זהות:'" [id]="editedContact.key + '_idNumber'"  type="text" placeholder="תעודת זהות" [(ngModel)]="editedContact.idNumber" name="idNumber"/></div>
-  <div>
-    <input type="text" name="phoneNumber" [id]="editedContact.key + '_phoneNumber'" [labelText]="'מספר טלפון:'"
-           [(ngModel)]="editedContact.phoneNumber"></div>
-  <div><input [id]="editedContact.key + '_city'" [labelText]="'יישוב:'" type="text" name="city" [(ngModel)]="editedContact.city"></div>
-  <div><input [id]="editedContact.key + '_address'" [labelText]="'כתובת:'" type="text" name="address" [(ngModel)]="editedContact.address"></div>
-  <div><input [id]="editedContact.key + '_eMail'" [labelText]="'כתובת דוא&quot;ל:'"  type="text" placeholder="e-mail"  [(ngModel)]="editedContact.emailAddress" name="email"/></div>
-  <div><input [id]="editedContact.key + '_fromDate'" [labelText]="'מתאריך:'" type="text" name="fromDate" [(ngModel)]="editedContact.fromDate"></div>
-  <!--<div><input  [id]="editedContact.key + '_toDate'" [labelText]="'תאריך אחרון לתשלום:'"-->
-  <!--type="text" name="toDate" [(ngModel)]="editedContact.toDate"></div>-->
+      <input [labelText]="'מספר תעודת זהות:'" [id]="editedContact.key + '_idNumber'"  type="text" class="form-control" placeholder="תעודת זהות" [(ngModel)]="editedContact.idNumber" name="idNumber" required pattern="\d{1,9}" />
+      </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="phoneNumber" [id]="editedContact.key + '_phoneNumber'" [labelText]="'מספר טלפון:'"
+             [(ngModel)]="editedContact.phoneNumber" required pattern="0\d{1,2}( |-)?\d{7}"></div>
+    <div class="form-group"><input [id]="editedContact.key + '_city'" [labelText]="'יישוב:'" type="text" class="form-control" name="city" [(ngModel)]="editedContact.city" required></div>
+    <div class="form-group"><input [id]="editedContact.key + '_address'" [labelText]="'כתובת:'" type="text" class="form-control" name="address" [(ngModel)]="editedContact.address"></div>
+    <div class="form-group"><input [id]="editedContact.key + '_eMail'" [labelText]="'כתובת דוא&quot;ל:'"  type="email" class="form-control" placeholder="e-mail"  [(ngModel)]="editedContact.emailAddress" name="email" required/></div>
+    <div class="form-group"><input [id]="editedContact.key + '_fromDate'" [labelText]="'מתאריך:'" type="text" class="form-control" name="fromDate" [(ngModel)]="editedContact.fromDate"></div>
+
+    <!--<div><input  [id]="editedContact.key + '_toDate'" [labelText]="'תאריך אחרון לתשלום:'"-->
+    <!--type="text" name="toDate" [(ngModel)]="editedContact.toDate"></div>-->
 
 
-  <button type="button" class="glyphicon glyphicon-remove" (click)="revertChanges()"></button>
+    <button type="button" class="glyphicon glyphicon-remove" (click)="revertChanges()"></button>
 
 
-  <button type="submit" class="glyphicon glyphicon-floppy-disk"></button>
-</form>
+    <button type="submit" class="glyphicon glyphicon-floppy-disk"></button>
+  </form>
+</div>

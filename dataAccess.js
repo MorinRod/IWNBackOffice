@@ -14,7 +14,7 @@ function newContact(contactToAdd) {
         }
 
     var cluster = new couchbase.Cluster(address);
-    var bucket = cluster.openBucket('IWNContacts',config.database.password,function(err, result) {
+    var bucket = cluster.openBucket('IWN',config.database.password,function(err, result) {
         if (err) {
                 console.error('Error connecting db', err);
             }
@@ -53,7 +53,7 @@ function openBucket() {
     try {
         console.log("-------- open bucket -------")
         var cluster = new couchbase.Cluster(address);
-        var bucket = cluster.openBucket('IWNContacts', config.database.password);
+        var bucket = cluster.openBucket('IWN', config.database.password);
         bucket.operationTimeout = 30 * 1000;
 
         return bucket;
