@@ -104,8 +104,8 @@ export class MembersMiddleware {
     else if (action.type === Members.SaveMember) {
       const addContactSuccessHandler = result => {
         //return this.getContacts(store, next);
-       let newPayload = this.setChangedMember(store,action.payload, result.json());
-        return next({type: Members.GetMembers, payload: newPayload});
+         let newPayload = this.setChangedMember(store,action.payload, result.json());
+         return next({type: Members.GetMembers, payload: newPayload});
 
       };
 
@@ -121,14 +121,16 @@ export class MembersMiddleware {
     
     else if (action.type === Members.DeleteMember) {
       const deleteMemberSuccessHandler = result => {
-        return next({type: Members.Deleted, payload: action.payload});
+        //return next({type: Members.Deleted, payload: action.payload});
+        return this.getContacts(store, next);
       };
 
       const errorHandler = error => next({
         type: Members.LoadingError,
         payload: error.json()
       });
-      this.authHttp.delete(this.url + '/' + action.payload.memberId, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
+      // console.log("member id to delete is",action.payload.idNumber);
+      this.authHttp.delete(this.url +'/contacts' + '/' + action.payload.idNumber, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
 
 
     }

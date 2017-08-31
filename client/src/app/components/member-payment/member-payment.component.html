@@ -5,7 +5,7 @@
 <app-edit-payment-form (savePayment)="savePayment($event)" [payment]="newPayment"
                        *ngIf="newPayment"></app-edit-payment-form>
 
-
+<button type="button" class="glyphicon glyphicon-remove" (click)="revertChanges()"></button>
 <div *ngIf="_store.state.payments.payments && _store.state.payments.payments.length">
   <div class="row">
     <div class="col-xs-1 header-row">תאריך התשלום</div>
@@ -24,8 +24,8 @@
     <div *ngIf="!payment.isEdited" class="col-xs-1"><a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה"
                              (click)="editPayment(payment)"></a>
     </div>
-    <app-edit-payment-form  *ngIf="payment.isEdited"
-                            (savePayment)="savePayment($event)" [payment]="payment"                         ></app-edit-payment-form>
+    <button type="button" class="glyphicon glyphicon-remove" (click)="revertChanges()"></button>
+    <app-edit-payment-form  *ngIf="payment.isEdited" (savePayment)="savePayment($event)" [payment]="payment"></app-edit-payment-form>
   </div>
 
 </div>

@@ -27,7 +27,6 @@ export class MemberPaymentComponent implements OnInit {
       payment.isEdited = true;
   }
 
-
   addNewPayment() {
     this.newPayment = new Payment();
     this.newPayment.memberId = this.memberId;
@@ -35,7 +34,13 @@ export class MemberPaymentComponent implements OnInit {
 
   savePayment(payment: Payment) {
     console.debug('saving payment', payment);
-      this.memberActions.savePayment(payment);
+    payment.isEdited=false;
+    this.newPayment=null;
+    this.memberActions.savePayment(payment);
+  }
+
+   revertChanges(payment:Payment){
+      payment.isEdited = false;
   }
 
   ngOnInit() {

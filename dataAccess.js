@@ -12,25 +12,54 @@ function newContact(contactToAdd) {
     if (!contactToAdd || (!contactToAdd.eMail && !contactToAdd.idNumber && !contactToAdd.phoneNumber)) {
         throw 'Missing contact Id number';
         }
-
-    var cluster = new couchbase.Cluster(address);
-    var bucket = cluster.openBucket('IWN',config.database.password,function(err, result) {
-        if (err) {
-                console.error('Error connecting db', err);
-            }
-    });
+    let bucket = openBucket();
 
     contactToAdd.type = 'contact';
-    console.log('contact to add', contactToAdd);
+    //console.log('contact to add', contactToAdd);
+    bucket.counter('contact_counter', 1,{'initial':0}, result=>{
+         bucket.upsert('contact_'+result, contactToAdd,
+            function (err, result) {
+                if (err) {
+                    console.error('Error saving contact---', err);
+                }
+                console.log(result);
 
-     bucket.upsert(getKey(contactToAdd), contactToAdd,
-        function (err, result) {
-            if (err) {
-                console.error('Error saving contact', err);
-            }
-            console.log(result);
-
+            });
         });
+    
+}
+
+function deleteContact(callback,idToDelete){
+    let key = 'contact_' + idToDelete;
+    let bucket=openBucket();
+    bucket.remove(key,function(err,result){
+        if(err){
+            console.error('----Error deleting ')
+        }
+        console.log(result);
+    });
+    //----Todo: delete related payments--------
+}
+
+function newPayment(paymentToAdd){
+    if(!paymentToAdd || !paymentToAdd.transactionId)
+        throw 'Missing payment\'s transaction Id number' ;
+    var docId;
+    if(paymentToAdd.docId){
+        docId=paymentToAdd.docId;      
+    }
+    else{
+        paymentToAdd.type='payment';
+        docId='payment_'+paymentToAdd.transactionId;
+    }
+    //console.log("docId is ",docId);
+    let bucket=openBucket();
+    bucket.upsert(docId,paymentToAdd,function(err,result){
+        if(err){
+            console.error('Error saving payment---',err)
+        }
+        console.log(result);
+    });
 }
 
 function getKey(contact) {
@@ -53,7 +82,8 @@ function openBucket() {
     try {
         console.log("-------- open bucket -------")
         var cluster = new couchbase.Cluster(address);
-        var bucket = cluster.openBucket('IWN', config.database.password);
+        var bucket = cluster.openBucket('iwn', config.database.password);
+        //var bucket = cluster.openBucket('IWN','');
         bucket.operationTimeout = 30 * 1000;
 
         return bucket;
@@ -75,13 +105,14 @@ function getContacts(callback) {
 
     bucket.query(query, function (err, results) {
         var resultsToSend = null;
-        console.log('got results', results);
+        //console.log('got results', results);
         if (results) {
             resultsToSend = results.map(item => item.value);
         }
         if (resultsToSend) {
             resultsToSend.forEach((item, index) => {
-                item.key = results[index].key;
+                if(item)
+                    item.key = results[index].key;
             });
         }
 
@@ -89,6 +120,32 @@ function getContacts(callback) {
     });
 
 }
+
+function getPayments(callback,id){
+    let bucket = openBucket();
+    var N1qlQuery = couchbase.N1qlQuery;
+    var query = N1qlQuery.fromString('SELECT i.*,META(i).id as docId FROM `iwn` i WHERE type="payment" and memberId=$1');
+    var memberId='\"'+id+'\"';
+
+    bucket.query(query,[id],function(err,results){
+        var resultsToSend = null;
+        console.log('got results', results);
+        // if (results) {
+        //     resultsToSend = results.map(item => item.value);
+        // }
+        // console.log('results to send', resultsToSend);
+        // if (results) {
+        //     results.forEach((item, index) => {
+        //         if(item)
+        //             item.key = results[index].id;
+        //     });
+        // }
+        //console.log('results to send', resultsToSend);
+
+        callback(err, results);
+    })
+}
+
 
 function getUserByToken(userToken, callback) {
     var cluster = new couchbase.Cluster(address);
@@ -124,6 +181,9 @@ function saveUser(user, callback) {
 }
 
 exports.newContact = newContact;
+exports.newPayment = newPayment;
 exports.getContacts = getContacts;
+exports.getPayments = getPayments;
 exports.getUserByToken = getUserByToken;
 exports.saveUser = saveUser;
+exports.deleteContact = deleteContact;

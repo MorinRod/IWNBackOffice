@@ -13,6 +13,9 @@
 <div>
   <edit-contact *ngIf="newContact && newContact.isEdited" [editedContact]="newContact"></edit-contact>
 </div>
+   <div *ngIf="newContact && newContact.isNew" >
+    <label [(ngModel)]="newContact.errMsg" name="errMsg" ngDefaultControl>{{newContact.errMsg}}</label>
+  </div>
 <div *ngIf="_store.state.members && _store.state.members.length">
   <div class="first row" >
   <!--<div class="col-md-1 header-row">מספר סידורי</div>-->
@@ -68,7 +71,7 @@
   <contact-component *ngIf="member && !member.isEdited" [index]="from + index" [hilightWord]="searchWord" [contact]="member"></contact-component>
   <div class="col-xs-1" *ngIf="!member.isEdited" >
     <a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה" (click)="editContact(member)"></a>
-    <a class="glyphicon glyphicon-erase" title="מחיקה" (click)="deleteMember(member)"></a>
+    <a class="glyphicon glyphicon-erase" href="javascript:void(0)" title="מחיקה" (click)="deleteMember(member)"></a>
   </div>
 
 <!--<edit-contact *ngIf="member.isEdited && member !== newContact" [editedContact]="member"></edit-contact>-->

@@ -8,4 +8,5 @@ export class Payment{
   memberId: string;
   transactionId: number;
   isEdited: boolean;
+  isNew:boolean;
 }

@@ -12,7 +12,6 @@ import { SearchPipePipe } from "../pipes/search-pipe.pipe";
 })
 export class MembersListComponent implements OnInit {
   private sortKey: string;
-
   ngOnInit(): void {
     this.getContacts();
   }
@@ -21,9 +20,9 @@ export class MembersListComponent implements OnInit {
   private _store: Store;
   private newContact: Member;
   private searchWord: string;
-
   private from: number;
   private itemsInPage: number;
+
 
   constructor(_store: Store, memberActions: MembersActions, private cd: ChangeDetectorRef) {
     this._store = _store;
@@ -79,17 +78,18 @@ export class MembersListComponent implements OnInit {
     this.from -= this.itemsInPage;
   }
 
-  deleteMember(member: Member) {
+  deleteMember(member) {
+    // console.log("member to delete is",JSON.stringify(member));
     this.memberActions.deleteMember(member);
   }
 
   addNewContact() {
     let member = new Member();
     member.isEdited = true;
-    this.memberActions.addContact(member);
+    member.isNew=true;
 
+    //this.memberActions.addContact(member);
     this.newContact = member;
-
   }
 
   getContacts() {
@@ -98,7 +98,10 @@ export class MembersListComponent implements OnInit {
 
   editContact(member) {
     member.isEdited = true;
+    member.isNew=false;
     this.newContact = member;
   }
+
+  
 
 }

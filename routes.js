@@ -9,6 +9,7 @@ module.exports = function(app, passport, express, authenticate) {
     app.use(function (req, res, next) {
         res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Authorization');
+        res.header('Access-Control-Allow-Methods','POST, GET, OPTIONS, DELETE');
         next();
     });
     app.use(authenticate);
@@ -67,6 +68,42 @@ module.exports = function(app, passport, express, authenticate) {
         }
         res.send();
 
+    });
+
+    app.delete('/members-screen/contacts/:id',function(req,res){
+        //console.log("------delete method----")
+        try {
+            var dataAccess=require('./dataAccess');
+            dataAccess.deleteContact(function(err,results){
+                console.log('error', err);
+                res.send(results);
+            },req.params.id);
+        }
+        catch(err){
+            console.error(err)
+        }
+        res.send();
+    });
+
+    app.get('/payments/:id',function(req,res){
+        var dataAccess = require('./dataAccess');
+        //console.log('id is '+req.params.id);
+        dataAccess.getPayments(function(err,results){
+            console.log('error', err);
+            //console.log('results', results);
+            res.send(results);
+        },req.params.id);
+    });
+
+    app.post('/payments',function(req,res){
+        try {
+            var dataAccess=require('./dataAccess');
+            dataAccess.newPayment(req.body);
+        }
+        catch(err){
+            console.error(err)
+        }
+        res.send();
     });
 
 // send to facebook to do the authentication
