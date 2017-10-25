@@ -43,7 +43,7 @@ export class MembersActions {
     });
   }
 
-  deleteMember(member: Member){
+  deleteMember(member){
     this.store.dispatch({type: Members.DeleteMember,
       payload: member
     });

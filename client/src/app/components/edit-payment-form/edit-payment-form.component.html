@@ -2,5 +2,6 @@
   <input [labelText]="'תאריך התשלום'" id="newPaymentDAte" type="date" name="paymentDate" [(ngModel)]="payment.paymentDate"/>
   <input [labelText]="'סכום התשלום'" id="newPaymentSum" type="number" name="paymentSum" [(ngModel)]="payment.sum"/>
   <input [labelText]="'התקבל'" id="newPAymentAccepted" type="checkbox" name="paymentAccepted" [(ngModel)]="payment.accepted"/>
+  <input [labelText]="'אסמכתא'" type="number" name="paymentTransactionId" [(ngModel)]="payment.transactionId">
   <button type="submit" class="glyphicon glyphicon-floppy-disk"></button>
 </form>

@@ -1,5 +1,6 @@
+
 <div class="jumbotron">
-  <form #form="ngForm" (submit)="addNewContact()" *ngIf="editedContact" style="margin:20px;">
+  <form #form="ngForm" (submit)="addContact()" *ngIf="editedContact" style="margin:20px;">
     <div class="form-group">
       <input [labelText]="'שם פרטי:'" [id]="editedContact.key + '_firstName'"  type="text" class="form-control" placeholder="שם פרטי" [(ngModel)]="editedContact.firstName" name="firstName" required pattern="[a-zA-Z\u0590-\u05fe]+$"/>
     </div>
@@ -8,9 +9,8 @@
     <label [attr.for]="editedContact.key + '_lastName'">שם משפחה:</label>
       <input [id]="editedContact.key + '_lastName'" type="text" class="form-control" placeholder="שם משפחה" [(ngModel)]="editedContact.lastName" name="lastName" required pattern="[a-zA-Z\u0590-\u05fe]?\-+$" /></div>
     <div class="form-group">
-
-      <input [labelText]="'מספר תעודת זהות:'" [id]="editedContact.key + '_idNumber'"  type="text" class="form-control" placeholder="תעודת זהות" [(ngModel)]="editedContact.idNumber" name="idNumber" required pattern="\d{1,9}" />
-      </div>
+      <input [labelText]="'מספר תעודת זהות:'" [id]="editedContact.key + '_idNumber'"  type="text" class="form-control" placeholder="תעודת זהות" [(ngModel)]="editedContact.idNumber" name="idNumber" required pattern="\d{1,9}" disabled="{{!editedContact.isNew}}" />
+    </div>
     <div class="form-group">
       <input type="text" class="form-control" name="phoneNumber" [id]="editedContact.key + '_phoneNumber'" [labelText]="'מספר טלפון:'"
              [(ngModel)]="editedContact.phoneNumber" required pattern="0\d{1,2}( |-)?\d{7}"></div>
