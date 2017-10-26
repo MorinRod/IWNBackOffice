@@ -13,12 +13,8 @@ function newContact(contactToAdd) {
         throw 'Missing contact Id number';
         }
 
-    var cluster = new couchbase.Cluster(address);
-    var bucket = cluster.openBucket('IWN',config.database.password,function(err, result) {
-        if (err) {
-                console.error('Error connecting db', err);
-            }
-    });
+
+    var bucket = openBucket();
 
     contactToAdd.type = 'contact';
     console.log('contact to add', contactToAdd);
@@ -27,8 +23,9 @@ function newContact(contactToAdd) {
         function (err, result) {
             if (err) {
                 console.error('Error saving contact', err);
+            } else {
+                console.log(result);
             }
-            console.log(result);
 
         });
 }
@@ -53,14 +50,15 @@ function openBucket() {
     try {
         console.log("-------- open bucket -------")
         var cluster = new couchbase.Cluster(address);
-        var bucket = cluster.openBucket('IWN', config.database.password);
+        cluster.authenticate(config.database.credentials.userName, config.database.credentials.password);
+        var bucket = cluster.openBucket('IWN');
         bucket.operationTimeout = 30 * 1000;
 
         return bucket;
     
     } catch(e) {
         // statements
-        console.log(e);
+        console.log('error opening bucket', e);
     }
     
 }
@@ -80,7 +78,7 @@ function getContacts(callback) {
             resultsToSend = results.map(item => item.value);
         }
         if (resultsToSend) {
-            resultsToSend.forEach((item, index) => {
+            resultsToSend.filter(item => item !== null) .forEach((item, index) => {
                 item.key = results[index].key;
             });
         }
@@ -91,7 +89,7 @@ function getContacts(callback) {
 }
 
 function getUserByToken(userToken, callback) {
-    var cluster = new couchbase.Cluster(address);
+
     var bucket = openBucket();
     bucket.get(userToken, function (err, result) {
         if (err) {
@@ -103,7 +101,7 @@ function getUserByToken(userToken, callback) {
 }
 
 function saveUser(user, callback) {
-    var cluster = new couchbase.Cluster(address);
+
      let bucket = openBucket();
     bucket.operationTimeout = 30 * 1000;
 
@@ -112,7 +110,7 @@ function saveUser(user, callback) {
     bucket.upsert('user_' + user.id, user,
         function (err, result) {
             if (err) {
-                console.error(err);
+                console.error('Error saving user',err);
 
             }
             else {
