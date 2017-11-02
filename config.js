@@ -9,7 +9,10 @@ let config = {
     },
     database: {
         url: 'couchbase://localhost:8091', //couchbase://10.211.55.11' couchbase://13.79.36.80
-        password: 'password'
+        credentials: {
+            userName: 'Morin',
+            password: 'Rome123'
+        }
     }
 };
 

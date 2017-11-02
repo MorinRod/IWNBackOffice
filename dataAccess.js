@@ -82,7 +82,8 @@ function openBucket() {
     try {
         console.log("-------- open bucket -------")
         var cluster = new couchbase.Cluster(address);
-        var bucket = cluster.openBucket('iwn', config.database.password);
+        cluster.authenticate(config.database.credentials.userName, config.database.credentials.password)
+        var bucket = cluster.openBucket('IWN');
         //var bucket = cluster.openBucket('IWN','');
         bucket.operationTimeout = 30 * 1000;
 
@@ -105,13 +106,13 @@ function getContacts(callback) {
 
     bucket.query(query, function (err, results) {
         var resultsToSend = null;
-        //console.log('got results', results);
+        // console.log('got results', results);
         if (results) {
-            resultsToSend = results.map(item => item.value);
+            resultsToSend = results.filter(item => typeof item.value === 'object').map(item => item.value);
         }
         if (resultsToSend) {
             resultsToSend.forEach((item, index) => {
-                if(item)
+                if(item && typeof item === 'object')
                     item.key = results[index].key;
             });
         }
