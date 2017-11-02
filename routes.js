@@ -62,11 +62,13 @@ module.exports = function(app, passport, express, authenticate) {
             var dataAccess = require('./dataAccess');
 
             dataAccess.newContact(req.body);
+            res.send(req.body);
         }
         catch (err) {
             console.error(err);
+            res.error(err);
         }
-        res.send();
+
 
     });
 

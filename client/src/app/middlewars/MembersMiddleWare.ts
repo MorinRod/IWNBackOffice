@@ -24,7 +24,7 @@ export class MembersMiddleware {
           configuration.devUrl;
     }
 
- 
+
   setChangedMember(store, editedMember: Member, savedMember: Member) {
     savedMember.isEdited = false;
     let members = store.getState().members;
@@ -33,7 +33,7 @@ export class MembersMiddleware {
     );
 
     if (!editedMember.memberId || !changedMember) {
-      members[members.indexOf(editedMember)] = savedMember;   
+      members[members.indexOf(editedMember)] = savedMember;
       }
     else {
       members[members.indexOf(changedMember)] = savedMember;
@@ -67,7 +67,7 @@ export class MembersMiddleware {
       });
     };
 
-  
+
 
           const errorHandler = error => {
 
@@ -100,7 +100,7 @@ export class MembersMiddleware {
       action.type === Members.LoadingError) {
 
     }
-          
+
     else if (action.type === Members.SaveMember) {
       const addContactSuccessHandler = result => {
         //return this.getContacts(store, next);
@@ -118,8 +118,9 @@ export class MembersMiddleware {
         this.authHttp.post(this.url+'/contacts', action.payload)
         .subscribe(addContactSuccessHandler, errorHandler);
     }
-    
+
     else if (action.type === Members.DeleteMember) {
+      console.log('payload', action.payload);
       const deleteMemberSuccessHandler = result => {
         //return next({type: Members.Deleted, payload: action.payload});
         return this.getContacts(store, next);
@@ -130,7 +131,7 @@ export class MembersMiddleware {
         payload: error.json()
       });
       // console.log("member id to delete is",action.payload.idNumber);
-      this.authHttp.delete(this.url +'/contacts' + '/' + action.payload.idNumber, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
+      this.authHttp.delete(`${this.url}/contacts/${action.payload.key}`, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
 
 
     }

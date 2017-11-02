@@ -30,7 +30,7 @@ function newContact(contactToAdd) {
 }
 
 function deleteContact(callback,idToDelete){
-    let key = 'contact_' + idToDelete;
+    let key = idToDelete;
     let bucket=openBucket();
     bucket.remove(key,function(err,result){
         if(err){

@@ -1,7 +1,7 @@
 /**
  * Created by ranwahle on 07/09/2016.
  */
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {RootReducer} from './reducers/root';
 import {Injectable} from "@angular/core";
 import {UserMiddleware} from "./middlewars/UserMiddleware";
@@ -15,7 +15,7 @@ export class Store {
     constructor(members:MembersMiddleware, currentUser:UserMiddleware, paymentMiddleware: PaymentsMiddleware){
         let middlewares = [members.middleware, currentUser.middleware, paymentMiddleware.middleware];
        this.store = createStore(RootReducer,
-           applyMiddleware(...middlewares));
+         compose( applyMiddleware(...middlewares)));
          //  applyMiddleware(currentUser.middleware)
 
          //  let store = createStore(reducer, window.devToolsExtension && window.devToolsExtension()););
