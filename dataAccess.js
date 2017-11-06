@@ -16,17 +16,15 @@ function newContact(contactToAdd) {
 
     contactToAdd.type = 'contact';
     //console.log('contact to add', contactToAdd);
-    bucket.counter('contact_counter', 1,{'initial':0}, result=>{
-         bucket.upsert('contact_'+result, contactToAdd,
-            function (err, result) {
-                if (err) {
-                    console.error('Error saving contact---', err);
-                }
-                console.log(result);
-
-            });
-        });
-    
+    //bucket.set('contact_counter', 1, function() {
+        bucket.counter('contact_counter', 1,{'initial':0}, (err, res) => {
+            bucket.upsert('contact_'+res.value, contactToAdd, (error, result) => {
+                    if (error) {
+                        console.error('Error saving contact---', error);
+                        }
+                    console.log(result);
+                    });
+            });   
 }
 
 function deleteContact(callback,idToDelete){
