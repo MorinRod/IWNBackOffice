@@ -10,7 +10,7 @@ export class Auth {
   // Configure Auth0
   lock = new Auth0Lock('XYP1hH7kHW76mhiYHmbkMt9vS21S7HfG', 'iwn.eu.auth0.com', {});
 
-  constructor() { 
+  constructor() {
   	// Add callback for lock `authenticated` event
     this.lock.on("authenticated", (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
@@ -25,7 +25,7 @@ export class Auth {
   public authenticated() {
     // Check if there's an unexpired JWT
     // This searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired();
+    return tokenNotExpired('id_token');
   }
 
   public logout() {

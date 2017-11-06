@@ -22,7 +22,7 @@ export class PaymentsMiddleware {
   }
 
   setChangedPayment(payments: Payment[], payment: Payment): Payment[]{
-    let changedPayment =  payments.find(p => p.transactionId === payment.transactionId);
+    let changedPayment = payments?  payments.find(p => p.transactionId === payment.transactionId) : null;
     console.log("changed payment "+JSON.stringify(changedPayment));
     if (changedPayment){
       payments[payments.indexOf(changedPayment)] = payment;
