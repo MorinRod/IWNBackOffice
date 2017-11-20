@@ -27,6 +27,7 @@ import { MemberPaymentComponent } from './components/member-payment/member-payme
 import { AUTH_PROVIDERS }      from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { UniqueIdCheckService } from './services/unique-id-check.service';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -73,11 +74,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     routing,
     CommonComponents
   ],
-  providers: [Store, ...APP_ACTIONS, ...APP_Middlewars
+  providers: [UniqueIdCheckService,Store, ...APP_ACTIONS, ...APP_Middlewars
   ,{
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions]
+      deps: [Http, RequestOptions],
+      //providers: [UniqueIdCheckService]
     }],
   bootstrap: [AppComponent]
 })
