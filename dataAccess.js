@@ -15,18 +15,20 @@ function newContact(contactToAdd) {
     let bucket = openBucket();
 
     contactToAdd.type = 'contact';
-    //console.log('contact to add', contactToAdd);
-    bucket.counter('contact_counter', 1,{'initial':0}, result=>{
-         bucket.upsert('contact_'+result, contactToAdd,
-            function (err, result) {
-                if (err) {
-                    console.error('Error saving contact---', err);
+        bucket.counter('contact_counter', 1,{initial:1}, (err, res) => {
+            if (err) {
+                        console.error('Error incrementing counter---', err);
+                        }
+            if(res) {
+                console.log('result from counter function'+res);
+                bucket.upsert('contact_'+res.value, contactToAdd, (error, result) => {
+                        if (error) {
+                            console.error('Error saving contact---', error);
+                            }
+                        console.log(result);
+                    });
                 }
-                console.log(result);
-
-            });
-        });
-    
+            });   
 }
 
 function deleteContact(callback,idToDelete){
@@ -84,7 +86,6 @@ function openBucket() {
         var cluster = new couchbase.Cluster(address);
         cluster.authenticate(config.database.credentials.userName, config.database.credentials.password)
         var bucket = cluster.openBucket('IWN');
-        //var bucket = cluster.openBucket('IWN','');
         bucket.operationTimeout = 30 * 1000;
 
         return bucket;
