@@ -4,6 +4,8 @@ import {RegisterComponent} from "./components/auth/register.component";
 import {WelcomeComponent} from "./components/WelcomeComponent";
 import {MembersListComponent} from "./components/membersList.component";
 import {MemberPaymentComponent} from "./components/member-payment/member-payment.component";
+import {ErrorMsgComponent}  from "./components/error-msg/error-msg.component";
+
 
 const appRoutes: Routes = [
   {path: 'members-screen', component: MembersListComponent},

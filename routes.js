@@ -55,6 +55,23 @@ module.exports = function(app, passport, express, authenticate) {
         });
     });
 
+    app.get('/members-screen/contacts/IdUniqueCheck/:id',function(req,res){
+        try {
+            var dataAccess = require('./dataAccess');
+            dataAccess.IdUniqueCheck(function(err,results){
+                if(results.length>0)
+                    res.json(true);//id exists in db
+                else
+                    res.json(false);
+            }
+            ,req.params.id);
+        }
+        catch(err){
+            console.error(err);
+            res.status(500).send({ error: 'err' });
+        }
+    })
+
     app.post('/members-screen/contacts', function (req, res) {
         console.log(req.body);
         
@@ -66,7 +83,7 @@ module.exports = function(app, passport, express, authenticate) {
         }
         catch (err) {
             console.error(err);
-            res.error(err);
+            res.status(500).send({ error: 'err' });
         }
 
 

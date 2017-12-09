@@ -55,4 +55,5 @@ export class MembersActions {
       payload: contact
     });
   }
+
 }

@@ -21,6 +21,5 @@ export class Member {
   number: number;
   isEdited: boolean;
   isNew: boolean;
-  errMsg: string;
 
 }

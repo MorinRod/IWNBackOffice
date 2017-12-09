@@ -22,6 +22,7 @@ export class MembersListComponent implements OnInit {
   private searchWord: string;
   private from: number;
   private itemsInPage: number;
+  private errMsg: string;
 
 
   constructor(_store: Store, memberActions: MembersActions, private cd: ChangeDetectorRef) {
@@ -101,7 +102,6 @@ export class MembersListComponent implements OnInit {
     member.isNew=false;
     this.newContact = member;
   }
-
-  
+ 
 
 }
