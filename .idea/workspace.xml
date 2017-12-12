@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18335fc6-5323-4d8f-8afc-ee85b3eed841" name="Default" comment="Paging - fast forward and backwards &#10;Paging - counters">
+    <list default="true" id="18335fc6-5323-4d8f-8afc-ee85b3eed841" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" afterPath="$PROJECT_DIR$/client/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/app.component.html" afterPath="$PROJECT_DIR$/client/src/app/app.component.html" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/app.component.ts" afterPath="$PROJECT_DIR$/client/src/app/app.component.ts" />
-      <change beforePath="$PROJECT_DIR$/dataAccess.js" afterPath="$PROJECT_DIR$/dataAccess.js" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/middlewars/PaymentsMiddleware.ts" afterPath="$PROJECT_DIR$/client/src/app/middlewars/PaymentsMiddleware.ts" />
     </list>
     <ignored path="IWNBackOffice.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,32 +38,21 @@
       <file leaf-file-name="dataAccess.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dataAccess.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="167" column="0" lean-forward="true" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+            <state relative-caret-position="343">
+              <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
               <folding>
-                <marker date="1513094366000" expanded="true" signature="233:398" ph="{...}" />
-                <marker date="1513094366000" expanded="true" signature="233:469" ph="{...}" />
-                <marker date="1513094366000" expanded="true" signature="2732:2815" ph="{...}" />
+                <marker date="1513095572000" expanded="true" signature="233:398" ph="{...}" />
+                <marker date="1513095572000" expanded="true" signature="233:469" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="96">
-              <caret line="89" column="19" lean-forward="false" selection-start-line="89" selection-start-column="14" selection-end-line="89" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataacessTEst.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/dataacessTEst.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="29" column="15" lean-forward="false" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+              <caret line="106" column="19" lean-forward="false" selection-start-line="106" selection-start-column="14" selection-end-line="106" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -76,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/config.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
-              <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+              <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -106,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/client/src/app/actions/server.actions.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+              <caret line="3" column="7" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
               <folding>
                 <element signature="e#46#87#0" expanded="true" />
               </folding>
@@ -126,13 +112,24 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="PaymentsMiddleware.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/app/middlewars/PaymentsMiddleware.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="75" column="33" lean-forward="false" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MembersMiddleWare.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/app/middlewars/MembersMiddleWare.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="47" column="35" lean-forward="false" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+            <state relative-caret-position="152">
+              <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+                <marker date="1513095572000" expanded="true" signature="4626:4701" ph="{&quot;type&quot;: Members.LoadingError...}" />
               </folding>
             </state>
           </provider>
@@ -166,6 +163,8 @@
       <find>delete</find>
       <find>authenticate</find>
       <find>error getti</find>
+      <find>payme</find>
+      <find>success</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -198,7 +197,6 @@
         <option value="$PROJECT_DIR$/client/src/app/models/payment.ts" />
         <option value="$PROJECT_DIR$/client/src/app/components/member-payment/member-payment.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/components/member-payment/member-payment.component.ts" />
-        <option value="$PROJECT_DIR$/client/src/app/middlewars/PaymentsMiddleware.ts" />
         <option value="$PROJECT_DIR$/client/src/app/components/edit-payment-form/edit-payment-form.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/constants/actions.ts" />
         <option value="$PROJECT_DIR$/client/src/app/actions/members.actions.ts" />
@@ -226,6 +224,7 @@
         <option value="$PROJECT_DIR$/config.js" />
         <option value="$PROJECT_DIR$/client/src/app/app.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/app.component.html" />
+        <option value="$PROJECT_DIR$/client/src/app/middlewars/PaymentsMiddleware.ts" />
       </list>
     </option>
   </component>
@@ -271,31 +270,7 @@
             <path>
               <item name="IWNBackOffice" type="b2602c69:ProjectViewProjectNode" />
               <item name="IWNBackOffice" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IWNBackOffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IWNBackOffice" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IWNBackOffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IWNBackOffice" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IWNBackOffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IWNBackOffice" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IWNBackOffice" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IWNBackOffice" type="462c0819:PsiDirectoryNode" />
-              <item name="mailer" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -315,7 +290,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="SearchEverywhereHistoryKey" value="route&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/routes.js&#10;APP&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/src/app/app.component.html&#10;pac&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/package.json&#10;mem&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/src/app/middlewars/MembersMiddleWare.ts&#10;packa&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/package.json&#10;label&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/src/app/commonComponents/LabelTextDirctive.ts&#10;opComponent&#9;null&#9;null&#10;NgModule&#9;null&#9;null&#10;oauth2.js&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/node_modules/passport-oauth/lib/passport-oauth/strategies/oauth2.js" />
+    <property name="SearchEverywhereHistoryKey" value="פשטצקמא&#9;null&#9;null&#10;route&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/routes.js&#10;APP&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/src/app/app.component.html&#10;pac&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/package.json&#10;mem&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/src/app/middlewars/MembersMiddleWare.ts&#10;packa&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/package.json&#10;label&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/client/src/app/commonComponents/LabelTextDirctive.ts&#10;opComponent&#9;null&#9;null&#10;NgModule&#9;null&#9;null&#10;oauth2.js&#9;FILE&#9;file:///Users/ranwahle/projects/IWNBackOffice/node_modules/passport-oauth/lib/passport-oauth/strategies/oauth2.js" />
     <property name="editor.config.accepted" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
   </component>
@@ -334,6 +309,136 @@
       <recent name="$PROJECT_DIR$/public/src" />
       <recent name="$PROJECT_DIR$/public/src/components/auth" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/package-lock.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/actions/members.actions.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/app.module.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/app.routes.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/components/EditContact/EditContact.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/components/membersList.component.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/components/membersList.component.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/constants/actions.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/middlewars/MembersMiddleWare.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/models/Member.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/reducers/root.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dataAccess.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/package-lock.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/routes.js</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/components/error-msg/error-msg.component.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/components/error-msg/error-msg.component.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/components/error-msg/error-msg.component.spec.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/components/error-msg/error-msg.component.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/client/src/app/reducers/errorMsg.reducer.ts</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -472,7 +577,7 @@
       <workItem from="1488195178617" duration="1976000" />
       <workItem from="1488765374937" duration="7507000" />
       <workItem from="1509610217947" duration="6949000" />
-      <workItem from="1513091966159" duration="3438000" />
+      <workItem from="1513091966159" duration="4098000" />
     </task>
     <task id="LOCAL-00001" summary="Angular  &amp; redux implementation">
       <created>1473584156886</created>
@@ -698,21 +803,36 @@
       <option name="project" value="LOCAL" />
       <updated>1509619184504</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Paging - fast forward and backwards &#10;Paging - counters">
+      <created>1513095422735</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1513095422735</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Paging - fast forward and backwards &#10;Paging - counters">
+      <created>1513095527091</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1513095527091</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="284893000" />
+    <option name="totallyTimeSpent" value="285553000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5152318" sideWeight="0.35024664" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46622518" sideWeight="0.86751235" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5152318" sideWeight="0.64975333" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5152318" sideWeight="0.64975333" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32711443" sideWeight="0.4918957" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28752643" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -905,13 +1025,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/src/app/directives/sort-arrow.directive.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/pipes/search-pipe.pipe.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1046,6 +1159,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="801">
           <caret line="115" column="17" lean-forward="false" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1116,8 +1230,8 @@
         <state relative-caret-position="285">
           <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#46#106#0" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#46#106#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1168,12 +1282,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dataAccess.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="167" column="0" lean-forward="true" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+        <state relative-caret-position="343">
+          <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
           <folding>
-            <marker date="1513094366000" expanded="true" signature="233:398" ph="{...}" />
-            <marker date="1513094366000" expanded="true" signature="233:469" ph="{...}" />
-            <marker date="1513094366000" expanded="true" signature="2732:2815" ph="{...}" />
+            <marker date="1513095572000" expanded="true" signature="233:398" ph="{...}" />
+            <marker date="1513095572000" expanded="true" signature="233:469" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1181,7 +1294,7 @@
     <entry file="file://$PROJECT_DIR$/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+          <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -1191,7 +1304,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1219,7 +1332,7 @@
         <state relative-caret-position="240">
           <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1242,10 +1355,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/middlewars/MembersMiddleWare.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="47" column="35" lean-forward="false" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+        <state relative-caret-position="152">
+          <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+            <marker date="1513095572000" expanded="true" signature="4626:4701" ph="{&quot;type&quot;: Members.LoadingError...}" />
           </folding>
         </state>
       </provider>
@@ -1253,7 +1367,7 @@
     <entry file="file://$PROJECT_DIR$/client/src/app/actions/server.actions.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+          <caret line="3" column="7" lean-forward="false" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
           <folding>
             <element signature="e#46#87#0" expanded="true" />
           </folding>
@@ -1279,7 +1393,15 @@
     <entry file="file://$PROJECT_DIR$/routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
-          <caret line="89" column="19" lean-forward="false" selection-start-line="89" selection-start-column="14" selection-end-line="89" selection-end-column="19" />
+          <caret line="106" column="19" lean-forward="false" selection-start-line="106" selection-start-column="14" selection-end-line="106" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/middlewars/PaymentsMiddleware.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="75" column="33" lean-forward="false" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="33" />
           <folding />
         </state>
       </provider>
