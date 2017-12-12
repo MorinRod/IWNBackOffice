@@ -84,7 +84,8 @@ function openBucket() {
     try {
         console.log("-------- open bucket -------")
         var cluster = new couchbase.Cluster(address);
-        cluster.authenticate(config.database.credentials.userName, config.database.credentials.password)
+        console.log('username', config.database.credentials.username, 'password',config.database.credentials.password );
+        cluster.authenticate(config.database.credentials.username, config.database.credentials.password)
         var bucket = cluster.openBucket('IWN');
         bucket.operationTimeout = 30 * 1000;
 
@@ -162,9 +163,8 @@ function getUserByToken(userToken, callback) {
 }
 
 function saveUser(user, callback) {
-    var cluster = new couchbase.Cluster(address);
+   //  var cluster = new couchbase.Cluster(address);
      let bucket = openBucket();
-    bucket.operationTimeout = 30 * 1000;
 
     user.type = 'user';
     console.log('saving user', user);
