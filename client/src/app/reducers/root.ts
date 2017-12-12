@@ -6,10 +6,12 @@ import {UsersReducer} from "./users.reducer";
 import {serverReducer} from "./server.reducer";
 import {membersReducer} from "./members.reducer";
 import {paymentsReducer} from "./payments.reducer";
+import {errorMsgReducer} from "./errorMsg.reducer";
 
 export const RootReducer : Reducer<any>  = combineReducers({
     members: membersReducer,
     currentUser: UsersReducer,
     OnServerCall: serverReducer,
-    payments: paymentsReducer
+    payments: paymentsReducer,
+    errorMsg: errorMsgReducer
 });

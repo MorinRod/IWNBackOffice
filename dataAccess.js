@@ -43,6 +43,20 @@ function deleteContact(callback,idToDelete){
     //----Todo: delete related payments--------
 }
 
+function IdUniqueCheck(callback,id){
+    let bucket=openBucket();
+    var N1qlQuery=couchbase.N1qlQuery;
+    var query= N1qlQuery.fromString('SELECT * from `IWN` where type="contact" and idNumber=$1');
+    var memberId='\"'+id+'\"';
+    console.log('id unique check id ',id);
+    bucket.query(query,[id],function(err,res){
+        if(err){
+            console.error('-----Error in Id check');
+        } 
+        callback(err,res);
+    });
+}
+
 function newPayment(paymentToAdd){
     if(!paymentToAdd || !paymentToAdd.transactionId)
         throw 'Missing payment\'s transaction Id number' ;
@@ -127,7 +141,7 @@ function getContacts(callback) {
 function getPayments(callback,id){
     let bucket = openBucket();
     var N1qlQuery = couchbase.N1qlQuery;
-    var query = N1qlQuery.fromString('SELECT i.*,META(i).id as docId FROM `iwn` i WHERE type="payment" and memberId=$1');
+    var query = N1qlQuery.fromString('SELECT i.*,META(i).id as docId FROM `IWN` i WHERE type="payment" and memberId=$1');
     var memberId='\"'+id+'\"';
 
     bucket.query(query,[id],function(err,results){
@@ -189,3 +203,4 @@ exports.getPayments = getPayments;
 exports.getUserByToken = getUserByToken;
 exports.saveUser = saveUser;
 exports.deleteContact = deleteContact;
+exports.IdUniqueCheck = IdUniqueCheck;

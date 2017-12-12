@@ -12,8 +12,10 @@ export const Members = {
   GetPayments: 'Get member payments',
   SavePayment: 'Save Payment for member',
   DeleteMember: 'Delete member',
-  Deleted: 'Member deleted successfully'
-
+  Deleted: 'Member deleted successfully',
+  IdUniqeCheck:'Uniqness of Id number checked for new member',
+  ErrorMessageAdded:'Member_ErrorMessage Added',
+  ErrorMessageDeleted:'Member_ErrorMessage Deleted'
 };
 
 
