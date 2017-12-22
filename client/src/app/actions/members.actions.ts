@@ -56,4 +56,10 @@ export class MembersActions {
     });
   }
 
+  deleteErrorMsg(){
+    this.store.dispatch({
+      type: Members.ErrorMessageDeleted
+    })
+  }
+
 }

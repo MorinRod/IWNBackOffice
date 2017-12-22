@@ -14,7 +14,8 @@ export class EditContact {
 
      private membersActions: MembersActions;
      private _store: Store;
-    @Input() editedContact: Member
+    @Input() editedContact: Member;
+    @Input() errorMsg: String;
 
     constructor(private memberActions: MembersActions,_store:Store) {
       this.membersActions=memberActions;
@@ -27,7 +28,7 @@ export class EditContact {
 
     revertChanges(){
         this.editedContact.isEdited = false;
-
+        this.memberActions.deleteErrorMsg();
         this.memberActions.getContacts();
     }
 

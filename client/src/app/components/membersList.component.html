@@ -8,7 +8,7 @@
 <input type="text" id="searchBox" placeholder="חיפוש חפשי" [(ngModel)]="searchWord" name="searchWord" (keypress)="searchKeyPressed()">
 <button (click)="getContacts()" class="glyphicon glyphicon-refresh btn btn-primary bold">טעינה</button>
 <div>
-  <edit-contact *ngIf="newContact && newContact.isEdited" [editedContact]="newContact"></edit-contact>
+  <edit-contact *ngIf="newContact && (newContact.isEdited || _store.state.errorMsg.text)" [editedContact]="newContact" [errorMsg]="_store.state.errorMsg.text"></edit-contact>
 </div>
 <app-error-msg *ngIf="newContact && newContact.isNew" [errorMsg]="_store.state.errorMsg.text">
 </app-error-msg>

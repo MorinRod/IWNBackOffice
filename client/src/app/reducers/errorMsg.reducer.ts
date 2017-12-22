@@ -8,10 +8,7 @@ export function errorMsgReducer(state={},action){
 			return Object.assign({},state,{text: action.payload});
 		
 		case Members.ErrorMessageDeleted:
-		{
-			if(state.hasOwnProperty('errorMsg'))
-				return Object.assign({},state,{errorMsg: ''})
-		}
+			return Object.assign({},state,{text: ''});
 
 		default:
 			return state;
