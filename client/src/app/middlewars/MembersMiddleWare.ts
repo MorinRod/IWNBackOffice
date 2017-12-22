@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Server, Members, Users} from '../constants/actions';
 import {configuration} from '../constants/configuration';
 import {Http} from "@angular/http";
-import {AuthHttp}  from 'angular2-jwt';
+import {AuthHttp} from 'angular2-jwt';
 import {Member} from "../models/Member";
 
 
@@ -13,16 +13,16 @@ import {Member} from "../models/Member";
 export class MembersMiddleware {
 
 
-    private _http: Http;
-    private url: string;
+  private _http: Http;
+  private url: string;
 
-    constructor(_http: Http,private authHttp: AuthHttp) {
-        this._http = _http;
-        this.url = //'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+  constructor(_http: Http, private authHttp: AuthHttp) {
+    this._http = _http;
+    this.url = //'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
       //  'http://10.0.0.6/IWNDataServices/api/members';
-          //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
-          configuration.devUrl;
-    }
+      //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+      configuration.devUrl;
+  }
 
 
   setChangedMember(store, editedMember: Member, savedMember: Member) {
@@ -34,20 +34,19 @@ export class MembersMiddleware {
 
     if (!editedMember.memberId || !changedMember) {
       members[members.indexOf(editedMember)] = savedMember;
-      }
+    }
     else {
       members[members.indexOf(changedMember)] = savedMember;
-        }
-        return members;
-     }
+    }
+    return members;
+  }
 
   getContacts(store, next) {
 
-    let self = this;
     const successHandler = result => {
       store.dispatch({type: Server.DismissServerCall});
       console.log('contacts result', result);
-      let results = result.json();
+      let results = result.body !== '' ? result.json(): [];
       results.forEach(contact => {
         contact.isEdited = false;
         if (!contact.eMail) {
@@ -68,23 +67,22 @@ export class MembersMiddleware {
     };
 
 
+    const errorHandler = error => {
 
-          const errorHandler = error => {
+      console.log('error', error);
+      store.dispatch({type: Server.DismissServerCall});
 
-              console.log('error', error);
-              store.dispatch({type:Server.DismissServerCall});
+      if (error.status === 401) {
+        store.dispatch({type: Users.LogOut});
+      }
+      return next({
+        type: Members.LoadingError,
+        payload: error.status
+      });
+    }
 
-              if (error.status === 401){
-                  store.dispatch({type: Users.LogOut});
-              }
-              return next({
-                  type: Members.LoadingError,
-                 payload: error.status
-              });
-          }
-
-          this.authHttp.get(this.url+'/contacts').subscribe(successHandler, errorHandler);
-          return next({type: Server.OnServerCall});
+    this.authHttp.get(this.url + '/contacts').subscribe(successHandler, errorHandler);
+    return next({type: Server.OnServerCall});
 
   }
 
@@ -104,8 +102,8 @@ export class MembersMiddleware {
     else if (action.type === Members.SaveMember) {
       const addContactSuccessHandler = result => {
         //return this.getContacts(store, next);
-         let newPayload = this.setChangedMember(store,action.payload, result.json());
-         return next({type: Members.GetMembers, payload: newPayload});
+        let newPayload = this.setChangedMember(store, action.payload, result.json());
+        return next({type: Members.GetMembers, payload: newPayload});
 
       };
 
@@ -115,7 +113,7 @@ export class MembersMiddleware {
       });
 
 
-        this.authHttp.post(this.url+'/contacts', action.payload)
+      this.authHttp.post(this.url + '/contacts', action.payload)
         .subscribe(addContactSuccessHandler, errorHandler);
     }
 

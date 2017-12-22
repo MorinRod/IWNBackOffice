@@ -84,7 +84,7 @@ function openBucket() {
     try {
         console.log("-------- open bucket -------")
         var cluster = new couchbase.Cluster(address);
-        cluster.authenticate(config.database.credentials.userName, config.database.credentials.password)
+        cluster.authenticate(config.database.credentials.username, config.database.credentials.password)
         var bucket = cluster.openBucket('IWN');
         bucket.operationTimeout = 30 * 1000;
 
