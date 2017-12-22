@@ -3,22 +3,18 @@
 </span>
 
 </h3>
-
-<a *ngIf="!newContact || !newContact.isEdited" class="glyphicon glyphicon-plus" href="javascript:void(0)"
-(click)="addNewContact()" title="חדש" ></a>
+<a *ngIf="!newContact || !newContact.isEdited" class="glyphicon glyphicon-plus" href="javascript:void(0)" (click)="addNewContact()" title="חדש"></a>
 <label for="searchBox">חיפוש חפשי:</label>
 <input type="text" id="searchBox" placeholder="חיפוש חפשי" [(ngModel)]="searchWord" name="searchWord" (keypress)="searchKeyPressed()">
-
 <button (click)="getContacts()" class="glyphicon glyphicon-refresh btn btn-primary bold">טעינה</button>
 <div>
-  <edit-contact *ngIf="newContact && newContact.isEdited" [editedContact]="newContact"></edit-contact>
+  <edit-contact *ngIf="newContact && (newContact.isEdited || _store.state.errorMsg.text)" [editedContact]="newContact" [errorMsg]="_store.state.errorMsg.text"></edit-contact>
 </div>
-   <div *ngIf="newContact && newContact.isNew" >
-    <label [(ngModel)]="newContact.errMsg" name="errMsg" ngDefaultControl>{{newContact.errMsg}}</label>
-  </div>
+<app-error-msg *ngIf="newContact && newContact.isNew" [errorMsg]="_store.state.errorMsg.text">
+</app-error-msg>
 <div *ngIf="_store.state.members && _store.state.members.length">
-  <div class="first row" >
-  <!--<div class="col-md-1 header-row">מספר סידורי</div>-->
+  <div class="first row">
+    <!--<div class="col-md-1 header-row">מספר סידורי</div>-->
     <div class="col-md-1 header-row">
       <a class="bold" [appSortArrow]="'firstName'" [currentKeyWord]="sortKey" (click)="sortBy('firstName')" href="javascript:void(0)"> שם פרטי</a>
     </div>
@@ -38,7 +34,7 @@
       </a>
     </div>
     <div class="col-md-1 header-row hidden-xs">
-      <a  class="bold" [appSortArrow]="'city'" [currentKeyWord]="sortKey" (click)="sortBy('city')" href="javascript:void(0)">
+      <a class="bold" [appSortArrow]="'city'" [currentKeyWord]="sortKey" (click)="sortBy('city')" href="javascript:void(0)">
       יישוב
       </a>
     </div>
@@ -47,35 +43,28 @@
       כתובת
      </a>
     </div>
-
     <div class="col-md-2 header-row">
       <a class="bold" [appSortArrow]="'emailAddress'" [currentKeyWord]="sortKey" (click)="sortBy('emailAddress')" href="javascript:void(0)">
       e-mail
       </a>
     </div>
     <div class="col-md-1 header-row hidden-xs">תאריך הצטרפות</div>
-    <div class="col-md-1 header-row hidden-xs" >תאריך אחרון לתשלום</div>
-      <a class="glyphicon glyphicon-fast-forward" href="javascript:void(0)" (click)="moveFastBackwards()" *ngIf="from > 0"></a>
-
-      <a class="glyphicon glyphicon-step-forward" href="javascript:void(0)" (click)="moveBackwards()" *ngIf="from > 0"></a>
-      <a class="glyphicon glyphicon-step-backward" href="javascript:void(0)" (click)="moveForward()" *ngIf="filteredMembers &&  from + itemsInPage < filteredMembers.length"></a>
-      <a class="glyphicon glyphicon-fast-backward" href="javascript:void(0)" (click)="moveFastForward()" *ngIf="filteredMembers && from + itemsInPage < filteredMembers.length"></a>
-      {{from + 1}} - {{ to }}
-      <!--<div class="col-md-1 header-row">מעוניינת בעדכונים</div>-->
-      <!--<div class="col-md-1 header-row">מעוניינת להצטרף</div>-->
+    <div class="col-md-1 header-row hidden-xs">תאריך אחרון לתשלום</div>
+    <a class="glyphicon glyphicon-fast-forward" href="javascript:void(0)" (click)="moveFastBackwards()" *ngIf="from > 0"></a>
+    <a class="glyphicon glyphicon-step-forward" href="javascript:void(0)" (click)="moveBackwards()" *ngIf="from > 0"></a>
+    <a class="glyphicon glyphicon-step-backward" href="javascript:void(0)" (click)="moveForward()" *ngIf="filteredMembers &&  from + itemsInPage < filteredMembers.length"></a>
+    <a class="glyphicon glyphicon-fast-backward" href="javascript:void(0)" (click)="moveFastForward()" *ngIf="filteredMembers && from + itemsInPage < filteredMembers.length"></a> {{from + 1}} - {{ to }}
+    <!--<div class="col-md-1 header-row">מעוניינת בעדכונים</div>-->
+    <!--<div class="col-md-1 header-row">מעוניינת להצטרף</div>-->
   </div>
   <div class="spacerDiv"></div>
-    <!--<edit-contact *ngIf="newContact && newContact.isEdited" [editedContact]="newContact"></edit-contact>-->
+  <!--<edit-contact *ngIf="newContact && newContact.isEdited" [editedContact]="newContact"></edit-contact>-->
   <div class="row" *ngFor="let member of filteredMembers | orderBy: [sortKey] | pagingPipe:from:from+itemsInPage; let index = index ">
-
-  <contact-component *ngIf="member && !member.isEdited" [index]="from + index" [hilightWord]="searchWord" [contact]="member"></contact-component>
-  <div class="col-xs-1" *ngIf="!member.isEdited" >
-    <a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה" (click)="editContact(member)"></a>
-    <a class="glyphicon glyphicon-erase" href="javascript:void(0)" title="מחיקה" (click)="deleteMember(member)"></a>
+    <contact-component *ngIf="member && !member.isEdited" [index]="from + index" [hilightWord]="searchWord" [contact]="member"></contact-component>
+    <div class="col-xs-1" *ngIf="!member.isEdited">
+      <a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה" (click)="editContact(member)"></a>
+      <a class="glyphicon glyphicon-erase" href="javascript:void(0)" title="מחיקה" (click)="deleteMember(member)"></a>
+    </div>
+    <!--<edit-contact *ngIf="member.isEdited && member !== newContact" [editedContact]="member"></edit-contact>-->
   </div>
-
-<!--<edit-contact *ngIf="member.isEdited && member !== newContact" [editedContact]="member"></edit-contact>-->
-  </div>
-
-
 </div>

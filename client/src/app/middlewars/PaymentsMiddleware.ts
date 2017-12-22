@@ -71,7 +71,9 @@ export class PaymentsMiddleware {
     const successHandler = result => {
       store.dispatch({type: Server.DismissServerCall});
 
-      let results = result.json();
+      console.log('result', result);
+
+      let results = result._body ? result.json() : [];
 
 
       return next({

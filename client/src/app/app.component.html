@@ -19,7 +19,7 @@
 			<div class="btn-login">
   				<button class="btn btn-primary btn-margin" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
   				<button class="btn btn-primary btn-margin" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
- 			</div>			
+ 			</div>
 			</div>
 		</div>
 	</nav>
@@ -30,6 +30,6 @@
    שלום   {{_store.state.currentUser[0].name}}
 </span>
 
-<spinner *ngIf="_store.state.OnServerCall.loading"></spinner>
+<!--<spinner *ngIf="_store.state.OnServerCall.loading"></spinner>-->
 <router-outlet></router-outlet>
 

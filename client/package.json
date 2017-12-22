@@ -13,9 +13,11 @@
   "private": true,
   "dependencies": {
     "@angular/compiler": "^5.0.0",
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
     "@angular/forms": "^5.0.0",
     "@angular/http": "^5.0.0",
-    "@angular/common": "^5.0.5",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "angular2-jwt": "^0.2.3",
@@ -30,8 +32,6 @@
   },
   "devDependencies": {
     "@angular/cli": "^1.5.0",
-    "@angular/compiler-cli": "^5.0.0",
-    "@angular/core": "^5.0.0",
     "@angular/platform-browser": "^5.0.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
