@@ -43,6 +43,20 @@ function deleteContact(callback,idToDelete){
     //----Todo: delete related payments--------
 }
 
+function IdUniqueCheck(callback,id){
+    let bucket=openBucket();
+    var N1qlQuery=couchbase.N1qlQuery;
+    var query= N1qlQuery.fromString('SELECT * from `IWN` where type="contact" and idNumber=$1');
+    var memberId='\"'+id+'\"';
+    console.log('id unique check id ',id);
+    bucket.query(query,[id],function(err,res){
+        if(err){
+            console.error('-----Error in Id check');
+        } 
+        callback(err,res);
+    });
+}
+
 function newPayment(paymentToAdd){
     if(!paymentToAdd || !paymentToAdd.transactionId)
         throw 'Missing payment\'s transaction Id number' ;
@@ -84,6 +98,7 @@ function openBucket() {
     try {
         console.log("-------- open bucket -------")
         var cluster = new couchbase.Cluster(address);
+        console.log('username', config.database.credentials.userName, 'password',config.database.credentials.password );
         cluster.authenticate(config.database.credentials.userName, config.database.credentials.password)
         var bucket = cluster.openBucket('IWN');
         bucket.operationTimeout = 30 * 1000;
@@ -126,7 +141,7 @@ function getContacts(callback) {
 function getPayments(callback,id){
     let bucket = openBucket();
     var N1qlQuery = couchbase.N1qlQuery;
-    var query = N1qlQuery.fromString('SELECT i.*,META(i).id as docId FROM `iwn` i WHERE type="payment" and memberId=$1');
+    var query = N1qlQuery.fromString('SELECT i.*,META(i).id as docId FROM `IWN` i WHERE type="payment" and memberId=$1');
     var memberId='\"'+id+'\"';
 
     bucket.query(query,[id],function(err,results){
@@ -162,9 +177,8 @@ function getUserByToken(userToken, callback) {
 }
 
 function saveUser(user, callback) {
-    var cluster = new couchbase.Cluster(address);
+   //  var cluster = new couchbase.Cluster(address);
      let bucket = openBucket();
-    bucket.operationTimeout = 30 * 1000;
 
     user.type = 'user';
     console.log('saving user', user);
@@ -189,3 +203,4 @@ exports.getPayments = getPayments;
 exports.getUserByToken = getUserByToken;
 exports.saveUser = saveUser;
 exports.deleteContact = deleteContact;
+exports.IdUniqueCheck = IdUniqueCheck;

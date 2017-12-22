@@ -55,4 +55,11 @@ export class MembersActions {
       payload: contact
     });
   }
+
+  deleteErrorMsg(){
+    this.store.dispatch({
+      type: Members.ErrorMessageDeleted
+    })
+  }
+
 }

@@ -14,7 +14,8 @@ export class EditContact {
 
      private membersActions: MembersActions;
      private _store: Store;
-    @Input() editedContact: Member
+    @Input() editedContact: Member;
+    @Input() errorMsg: String;
 
     constructor(private memberActions: MembersActions,_store:Store) {
       this.membersActions=memberActions;
@@ -27,7 +28,7 @@ export class EditContact {
 
     revertChanges(){
         this.editedContact.isEdited = false;
-
+        this.memberActions.deleteErrorMsg();
         this.memberActions.getContacts();
     }
 
@@ -45,34 +46,11 @@ export class EditContact {
     }
 
     addNewContact() {
-        this.editedContact.errMsg='';
-        //console.log("result of ifExist() is ",this.IdExists(this.editedContact.idNumber))
-        if(!this.IdExists(this.editedContact.idNumber)){
-            this.memberActions.saveContact(this.editedContact);
-            this.editedContact.isEdited = false;
-        }
-        else{
-            this.editedContact.errMsg='ת.ז כבר קיימת במערכת';
-        }
-        
+        //this.editedContact.errMsg='';
+        //console.log("result of ifExist() is ",this.IdExists(this.editedContact.idNumber))      
+        this.memberActions.saveContact(this.editedContact);
+        this.editedContact.isEdited = false;
+               
     }
-
-    private IdExists(id:string){
-    let members = this._store.state.members;
-    console.log(this._store.state.members);
-    if(members){
-      let member = members.find(member => member.idNumber === id);
-      if(member){
-          console.log("member exists ",JSON.stringify(member));
-        return true;
-      }
-      else{
-          return false;
-      }
-    }
-    else{
-        return false;   
-          }
-      }
 
  }

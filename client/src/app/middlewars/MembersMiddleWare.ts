@@ -4,6 +4,7 @@ import {configuration} from '../constants/configuration';
 import {Http} from "@angular/http";
 import {AuthHttp}  from 'angular2-jwt';
 import {Member} from "../models/Member";
+//import { HttpClient, HttpParams } from '@angular/common/http';
 
 
 /**
@@ -22,6 +23,7 @@ export class MembersMiddleware {
       //  'http://10.0.0.6/IWNDataServices/api/members';
           //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
           configuration.devUrl;
+        
     }
 
 
@@ -102,21 +104,42 @@ export class MembersMiddleware {
     }
 
     else if (action.type === Members.SaveMember) {
-      const addContactSuccessHandler = result => {
-        //return this.getContacts(store, next);
-         let newPayload = this.setChangedMember(store,action.payload, result.json());
-         return next({type: Members.GetMembers, payload: newPayload});
+      console.log('check uniqness of id: ',action.payload);
+      const idCheckSuccessHandler = result =>{
+        if(result.text() === "true"){ //if contact id number already exists
+          store.dispatch({type: Members.GetMembers});
+          return next({
+            type: Members.ErrorMessageAdded,
+            payload: "Id Number Already Exists In The System"
+          });
+        }
+        else{ //contact id number doesn't exisis
 
+        const addContactSuccessHandler = result => {
+          //return this.getContacts(store, next);
+           let newPayload = this.setChangedMember(store,action.payload, result.json());
+           return next({type: Members.GetMembers, payload: newPayload});
+
+        };
+
+        const addContactErrorHandler = error => next({
+          type: Members.LoadingError,
+          payload: error.json()
+        });         
+
+          this.authHttp.post(this.url+'/contacts', action.payload)
+          .subscribe(addContactSuccessHandler, addContactErrorHandler);
+        }
       };
 
-      const errorHandler = error => next({
+      const idCheckErrorHandler = error => next =>({
         type: Members.LoadingError,
-        payload: error.json()
+        payload: error.json
       });
 
+      this.authHttp.get(`${this.url}/contacts/IdUniqueCheck/${action.payload.idNumber}`)
+      .subscribe(idCheckSuccessHandler,idCheckErrorHandler);
 
-        this.authHttp.post(this.url+'/contacts', action.payload)
-        .subscribe(addContactSuccessHandler, errorHandler);
     }
 
     else if (action.type === Members.DeleteMember) {

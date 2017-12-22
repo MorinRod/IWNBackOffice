@@ -28,6 +28,7 @@ import { AUTH_PROVIDERS }      from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { UniqueIdCheckService } from './services/unique-id-check.service';
+import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -64,7 +65,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     HilightPipe,
     OrderByPipe,
     SortArrowDirective,
-    MemberPaymentComponent
+    MemberPaymentComponent,
+    ErrorMsgComponent
   ],
   imports: [
     BrowserModule,
