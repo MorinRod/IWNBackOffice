@@ -38,7 +38,6 @@
     "dotenv": "^4.0.0",
     "easysoap": "^1.0.5",
     "express": "^4.9.5",
-    "express-handlebars": "^1.1.0",
     "express-jwt": "^5.1.0",
     "express-session": "^1.8.2",
     "method-override": "^2.2.0",

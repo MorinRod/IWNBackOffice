@@ -52,7 +52,7 @@ function IdUniqueCheck(callback,id){
     bucket.query(query,[id],function(err,res){
         if(err){
             console.error('-----Error in Id check');
-        } 
+        }
         callback(err,res);
     });
 }
@@ -98,8 +98,7 @@ function openBucket() {
     try {
         console.log("-------- open bucket -------")
         var cluster = new couchbase.Cluster(address);
-        console.log('username', config.database.credentials.userName, 'password',config.database.credentials.password );
-        cluster.authenticate(config.database.credentials.userName, config.database.credentials.password)
+        cluster.authenticate(config.database.credentials.username, config.database.credentials.password)
         var bucket = cluster.openBucket('IWN');
         bucket.operationTimeout = 30 * 1000;
 
