@@ -14,17 +14,17 @@ import {Member} from "../models/Member";
 export class MembersMiddleware {
 
 
-    private _http: Http;
-    private url: string;
+  private _http: Http;
+  private url: string;
 
-    constructor(_http: Http,private authHttp: AuthHttp) {
-        this._http = _http;
-        this.url = //'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+  constructor(_http: Http,private authHttp: AuthHttp) {
+    this._http = _http;
+    this.url = //'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
       //  'http://10.0.0.6/IWNDataServices/api/members';
-          //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
-          configuration.devUrl;
-        
-    }
+      //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+      configuration.devUrl;
+
+  }
 
 
   setChangedMember(store, editedMember: Member, savedMember: Member) {
@@ -36,12 +36,12 @@ export class MembersMiddleware {
 
     if (!editedMember.memberId || !changedMember) {
       members[members.indexOf(editedMember)] = savedMember;
-      }
+    }
     else {
       members[members.indexOf(changedMember)] = savedMember;
-        }
-        return members;
-     }
+    }
+    return members;
+  }
 
   getContacts(store, next) {
 
@@ -71,22 +71,22 @@ export class MembersMiddleware {
 
 
 
-          const errorHandler = error => {
+    const errorHandler = error => {
 
-              console.log('error', error);
-              store.dispatch({type:Server.DismissServerCall});
+      console.log('error', error);
+      store.dispatch({type:Server.DismissServerCall});
 
-              if (error.status === 401){
-                  store.dispatch({type: Users.LogOut});
-              }
-              return next({
-                  type: Members.LoadingError,
-                 payload: error.status
-              });
-          }
+      if (error.status === 401){
+        store.dispatch({type: Users.LogOut});
+      }
+      return next({
+        type: Members.LoadingError,
+        payload: error.status
+      });
+    }
 
-          this.authHttp.get(this.url+'/contacts').subscribe(successHandler, errorHandler);
-          return next({type: Server.OnServerCall});
+    this.authHttp.get(this.url+'/contacts').subscribe(successHandler, errorHandler);
+    return next({type: Server.OnServerCall});
 
   }
 
@@ -115,20 +115,20 @@ export class MembersMiddleware {
         }
         else{ //contact id number doesn't exisis
 
-        const addContactSuccessHandler = result => {
-          //return this.getContacts(store, next);
-           let newPayload = this.setChangedMember(store,action.payload, result.json());
-           return next({type: Members.GetMembers, payload: newPayload});
+          const addContactSuccessHandler = result => {
+            //return this.getContacts(store, next);
+            let newPayload = this.setChangedMember(store,action.payload, result.json());
+            return next({type: Members.GetMembers, payload: newPayload});
 
-        };
+          };
 
-        const addContactErrorHandler = error => next({
-          type: Members.LoadingError,
-          payload: error.json()
-        });         
+          const addContactErrorHandler = error => next({
+            type: Members.LoadingError,
+            payload: error.json()
+          });
 
           this.authHttp.post(this.url+'/contacts', action.payload)
-          .subscribe(addContactSuccessHandler, addContactErrorHandler);
+            .subscribe(addContactSuccessHandler, addContactErrorHandler);
         }
       };
 
@@ -138,7 +138,7 @@ export class MembersMiddleware {
       });
 
       this.authHttp.get(`${this.url}/contacts/IdUniqueCheck/${action.payload.idNumber}`)
-      .subscribe(idCheckSuccessHandler,idCheckErrorHandler);
+        .subscribe(idCheckSuccessHandler,idCheckErrorHandler);
 
     }
 

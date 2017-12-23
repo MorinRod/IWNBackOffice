@@ -3,7 +3,6 @@
  */
 //index.js/
 var express = require('express'),
-    exphbs = require('express-handlebars'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
@@ -13,14 +12,14 @@ var express = require('express'),
     flash = require('connect-flash'),
 
 
- //  mongoose = require('mongoose'),
+    //  mongoose = require('mongoose'),
     pulsimClient = require('./mailer/pulsimClient');
-    FacebookStrategy = require('passport-facebook');
+FacebookStrategy = require('passport-facebook');
 
 //We will be creating these two files shortly
 // var config = require('./config.js'), //config file contains all tokens and other private info
 //    funct = require('./functions.js'); //funct file contains our helper functions for our Passport and database work
-var  config = require('./config');
+var config = require('./config');
 var app = express();
 var jwt = require('express-jwt');
 var https = require('https');
@@ -28,17 +27,17 @@ var https = require('https');
 require('dotenv').config();
 
 if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_CLIENT_ID || !process.env.AUTH0_CLIENT_SECRET) {
-  throw 'Make sure you have AUTH0_DOMAIN, AUTH0_CLIENT_ID, and AUTH0_CLIENT_SECRET in your .env file'
+    throw 'Make sure you have AUTH0_DOMAIN, AUTH0_CLIENT_ID, and AUTH0_CLIENT_SECRET in your .env file'
 }
 
 
 var authenticate = jwt({
-  // Dynamically provide a signing key based on the kid in the header and the singing keys provided by the JWKS endpoint.
-  secret: process.env.AUTH0_CLIENT_SECRET,
-  // Validate the audience and the issuer.
-  audience: process.env.AUTH0_CLIENT_ID,
-  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-  algorithms: ['HS256']
+    // Dynamically provide a signing key based on the kid in the header and the singing keys provided by the JWKS endpoint.
+    secret: process.env.AUTH0_CLIENT_SECRET,
+    // Validate the audience and the issuer.
+    audience: process.env.AUTH0_CLIENT_ID,
+    issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+    algorithms: ['HS256']
 });
 
 //var configDB = require('./auth/config/database.js');
@@ -92,7 +91,7 @@ app.use(function (req, res, next) {
 // app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 //===============ROUTES===============
-require('./routes.js')(app, passport, express,authenticate);
+require('./routes.js')(app, passport, express, authenticate);
 //===============PORT=================
 var port = process.env.PORT || config.port || 5000; //select your port or let it pull from your .env file
 app.listen(port);
