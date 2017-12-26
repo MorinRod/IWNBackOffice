@@ -5,6 +5,7 @@
 
 let couchbase = require('couchbase');
 let config = require('./config');
+console.log("config is: ",config.database);
 var address = config.database.url;// 'couchbase://10.211.55.11';
 
 function newContact(contactToAdd) {
@@ -96,7 +97,8 @@ function getKey(contact) {
 
 function openBucket() {
     try {
-        console.log("-------- open bucket -------")
+        console.log("-------- open bucket -------");
+        console.log("config is: ",config);
         var cluster = new couchbase.Cluster(address);
         cluster.authenticate(config.database.credentials.username, config.database.credentials.password)
         var bucket = cluster.openBucket('IWN');

@@ -1,8 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
+import {HttpClient} from "@angular/common/http"
 import {Server, Members, Users} from "../constants/actions";
 import {Payment} from "../models/payment";
-import { AuthHttp }  from 'angular2-jwt';
+//import { AuthHttp }  from 'angular2-jwt';
 import {configuration} from '../constants/configuration';
 
 /**
@@ -16,7 +17,7 @@ export class PaymentsMiddleware {
   private url: string;
   private baseUrl:string;
 
-  constructor(private http: Http,private authHttp:AuthHttp) {
+  constructor(private _http: HttpClient) {
     this.url=configuration.baseUrl+'/payments'
     //this.url = 'http://iwndataservices20161217050028.azurewebsites.net/api/payments';//http://10.0.0.6/IWNDataServices/api/payments';
   }
@@ -36,8 +37,6 @@ export class PaymentsMiddleware {
     let self = this;
     const successHandler: (result) => any = result => {
       store.dispatch({type: Server.DismissServerCall});
-      console.log("result ",result);
-      //let results = result.json();
       console.debug('state', store);
 
       return next({
@@ -61,7 +60,7 @@ export class PaymentsMiddleware {
       });
     };
 
-    this.authHttp.post(this.url, action.payload).subscribe(successHandler, errorHandler);
+    this._http.post(this.url, action.payload).subscribe(successHandler, errorHandler);
     return next({type: Server.OnServerCall});
   }
 
@@ -71,14 +70,9 @@ export class PaymentsMiddleware {
     const successHandler = result => {
       store.dispatch({type: Server.DismissServerCall});
 
-      console.log('result', result);
-
-      let results = result._body ? result.json() : [];
-
-
       return next({
         type: Members.PaymentsLoaded,
-        payload: results
+        payload: result
       });
     };
 
@@ -96,7 +90,7 @@ export class PaymentsMiddleware {
       });
     }
 
-    this.authHttp.get(this.url + '/' + action.payload.memberId).subscribe(successHandler, errorHandler);
+    this._http.get(this.url + '/' + action.payload.memberId).subscribe(successHandler, errorHandler);
     return next({type: Server.OnServerCall});
 
   }

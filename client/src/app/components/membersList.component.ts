@@ -79,7 +79,6 @@ export class MembersListComponent implements OnInit {
   }
 
   deleteMember(member) {
-    // console.log("member to delete is",JSON.stringify(member));
     this.memberActions.deleteMember(member);
   }
 
@@ -88,7 +87,7 @@ export class MembersListComponent implements OnInit {
     member.isEdited = true;
     member.isNew=true;
 
-    //this.memberActions.addContact(member);
+    this.memberActions.addContact(member);
     this.newContact = member;
   }
 
