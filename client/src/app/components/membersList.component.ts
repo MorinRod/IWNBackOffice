@@ -22,7 +22,6 @@ export class MembersListComponent implements OnInit {
   private searchWord: string;
   private from: number;
   private itemsInPage: number;
-  private errMsg: string;
 
 
   constructor(_store: Store, memberActions: MembersActions, private cd: ChangeDetectorRef) {
@@ -80,7 +79,6 @@ export class MembersListComponent implements OnInit {
   }
 
   deleteMember(member) {
-    // console.log("member to delete is",JSON.stringify(member));
     this.memberActions.deleteMember(member);
   }
 
@@ -89,7 +87,7 @@ export class MembersListComponent implements OnInit {
     member.isEdited = true;
     member.isNew=true;
 
-    //this.memberActions.addContact(member);
+    this.memberActions.addContact(member);
     this.newContact = member;
   }
 
