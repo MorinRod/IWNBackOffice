@@ -39,6 +39,11 @@ export class MemberPaymentComponent implements OnInit {
     this.memberActions.savePayment(payment);
   }
 
+  deletePayment(payment:Payment){
+    console.log('deleting payment',payment);
+    this.memberActions.deletePayment(payment);
+  }
+
    revertChanges(payment:Payment){
       payment.isEdited = false;
   }

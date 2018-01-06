@@ -89,14 +89,14 @@ module.exports = function(app, passport, express, authenticate) {
 
     });
 
-    app.delete('/members-screen/contacts/:id',function(req,res){
+    app.delete('/members-screen/contacts/:docId/:contactId',function(req,res){
         //console.log("------delete method----")
         try {
             var dataAccess=require('./dataAccess');
             dataAccess.deleteContact(function(err,results){
                 console.log('error', err);
                 res.send(results);
-            },req.params.id);
+            },req.params.docId,req.params.contactId);
         }
         catch(err){
             console.error(err)
@@ -106,10 +106,8 @@ module.exports = function(app, passport, express, authenticate) {
 
     app.get('/payments/:id',function(req,res){
         var dataAccess = require('./dataAccess');
-        //console.log('id is '+req.params.id);
         dataAccess.getPayments(function(err,results){
             console.log('error', err);
-            //console.log('results', results);
             res.send(results);
         },req.params.id);
     });
@@ -123,6 +121,14 @@ module.exports = function(app, passport, express, authenticate) {
             console.error(err)
         }
         res.send();
+    });
+
+    app.delete('/payments/:id',function(req,res){
+            var dataAccess=require('./dataAccess');
+            dataAccess.deletePayment(function(err,result){
+                res.send(result);
+            },req.params.id);
+
     });
 
 // send to facebook to do the authentication

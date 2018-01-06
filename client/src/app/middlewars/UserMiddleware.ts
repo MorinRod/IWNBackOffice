@@ -4,7 +4,6 @@ import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
 import {configuration} from '../constants/configuration';
 import {HttpClient} from "@angular/common/http"
-//import {AuthHttp} from 'angular2-jwt';
 
 /**
  * Created by ranwahle on 14/09/2016.
@@ -28,8 +27,6 @@ export class UserMiddleware {
   middleware = store => next => action => {
     if (action.type === Users.GetCurrentUser) {
       const successHandler = result => {
-
-        //let results = result.body !== '' ? result.json() : [];
 
         return next({
           type: Users.CurrentUserLoaded,

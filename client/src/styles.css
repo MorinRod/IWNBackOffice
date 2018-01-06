@@ -77,8 +77,8 @@ edit-contact input{
     margin-top: 0.7%;
 }
 
-.members-list{
-  margin-top: 70px;
+.list{
+  margin-top: 2%;
 }
 
 .first{
@@ -88,3 +88,16 @@ edit-contact input{
 .bold{
   font-weight: bold;
 }
+
+.logo{
+  text-align: center;
+  margin-top: 5%;
+}
+
+.loading-btn-label{
+  cursor: pointer;
+}
+
+/*.btn-loading{
+  padding-top: 6px;
+}*/

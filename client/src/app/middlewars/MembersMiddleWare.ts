@@ -104,7 +104,7 @@ export class MembersMiddleware {
 
     else if (action.type === Members.SaveMember) {
       const idCheckSuccessHandler = result =>{
-        if(result === true){ //if contact id number already exists
+        if(result){ //if contact id number already exists
           store.dispatch({type: Members.GetMembers});
           return next({
             type: Members.ErrorMessageAdded,
@@ -148,8 +148,8 @@ export class MembersMiddleware {
       const errorHandler = error => next({
         type: Members.LoadingError,
         payload: error
-      });
-      this._http.delete(`${this.url}/contacts/${action.payload.key}`, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
+      });  
+      this._http.delete(`${this.url}/contacts/${action.payload.key}/${action.payload.idNumber}`, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
 
 
     }

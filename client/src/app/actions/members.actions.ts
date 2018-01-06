@@ -23,6 +23,13 @@ export class MembersActions {
     });
   }
 
+  deletePayment(payment:Payment){
+    this.store.dispatch({
+      type:Members.DeletePayment,
+      payload:payment
+    });
+  }
+
   getContacts() {
     this.store.dispatch({
       type: Members.GetMembers

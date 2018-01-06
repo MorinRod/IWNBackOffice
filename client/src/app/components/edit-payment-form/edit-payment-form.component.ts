@@ -21,6 +21,11 @@ export class EditPaymentFormComponent implements OnInit {
     this.savePayment.emit(this.payment);   
   }
 
+
+  revertChanges(){
+        this.payment.isEdited = false;
+  }
+
   ngOnInit() {
   }
 
