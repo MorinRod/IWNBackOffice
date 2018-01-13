@@ -1,5 +1,7 @@
-<h2> רשימת תשלומים</h2>
-<button (click)="getPayments()" class="glyphicon glyphicon-refresh">טעינה</button>
+<h3 class="list"> רשימת תשלומים</h3>
+<button (click)="getPayments()" class="glyphicon glyphicon-refresh btn btn-primary bold btn-loading">
+  <label class="loading-btn-label">טעינה</label>
+</button>
 <a class="glyphicon glyphicon-plus" href="javascript:void(0)"
    (click)="addNewPayment()" title="חדש"></a>
 <app-edit-payment-form (savePayment)="savePayment($event)" [payment]="newPayment"
@@ -16,16 +18,23 @@
 
   </div>
   <div class="row" *ngFor="let payment of _store.state.payments.payments">
-    <div class="col-xs-1">{{payment.paymentDate | date:'dd/MM/yy'}}</div>
-    <div class="col-xs-1">{{payment.sum}}</div>
+    <div *ngIf="!payment.isEdited">   
+      <div class="col-xs-1">{{payment.paymentDate | date:'dd/MM/yy'}}</div>
+      <div class="col-xs-1">{{payment.sum}}</div>
 
-    <div class="col-xs-1"><span [innerHTML]="payment.accepted | booleanpipe"></span></div>
-    <div class="col-xs-1">{{payment.transactionId}}</div>
-    <div *ngIf="!payment.isEdited" class="col-xs-1"><a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה"
-                             (click)="editPayment(payment)"></a>
+      <div class="col-xs-1"><span [innerHTML]="payment.accepted | booleanpipe"></span></div>
+      <div class="col-xs-1">{{payment.transactionId}}</div>
+      <div *ngIf="!payment.isEdited" class="col-xs-1"><a class="glyphicon glyphicon-pencil" href="javascript:void(0)" title="עריכה"
+                               (click)="editPayment(payment)"></a>
+      </div>
+      <div>
+      <a class="glyphicon glyphicon-erase" href="javascript:void(0)" title="מחיקה" (click)="deletePayment(payment)"></a>
+      </div>
     </div>
-    <button type="button" class="glyphicon glyphicon-remove" (click)="revertChanges()"></button>
     <app-edit-payment-form  *ngIf="payment.isEdited" (savePayment)="savePayment($event)" [payment]="payment"></app-edit-payment-form>
+    <div>
+
+    </div>    
   </div>
 
 </div>

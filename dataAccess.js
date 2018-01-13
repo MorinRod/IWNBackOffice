@@ -32,8 +32,8 @@ function newContact(contactToAdd) {
             });   
 }
 
-function deleteContact(callback,idToDelete){
-    let key = idToDelete;
+function deleteContact(callback,docId,contactId){
+    let key = docId;
     let bucket=openBucket();
     bucket.remove(key,function(err,result){
         if(err){
@@ -41,7 +41,7 @@ function deleteContact(callback,idToDelete){
         }
         console.log(result);
     });
-    //----Todo: delete related payments--------
+    deleteContactPayments(contactId);
 }
 
 function IdUniqueCheck(callback,id){
@@ -49,7 +49,6 @@ function IdUniqueCheck(callback,id){
     var N1qlQuery=couchbase.N1qlQuery;
     var query= N1qlQuery.fromString('SELECT * from `IWN` where type="contact" and idNumber=$1');
     var memberId='\"'+id+'\"';
-    console.log('id unique check id ',id);
     bucket.query(query,[id],function(err,res){
         if(err){
             console.error('-----Error in Id check');
@@ -69,7 +68,6 @@ function newPayment(paymentToAdd){
         paymentToAdd.type='payment';
         docId='payment_'+paymentToAdd.transactionId;
     }
-    //console.log("docId is ",docId);
     let bucket=openBucket();
     bucket.upsert(docId,paymentToAdd,function(err,result){
         if(err){
@@ -77,6 +75,29 @@ function newPayment(paymentToAdd){
         }
         console.log(result);
     });
+}
+
+function deletePayment(callback,transactionId){
+    var docId=`payment_${transactionId}`;
+    let bucket=openBucket();
+    bucket.remove(docId,function(err,res){
+        if(err){
+            console.error('Error deleting payment---',err);
+        }
+        callback(err,res);
+    });
+}
+
+function deleteContactPayments(memberId){
+    let bucket=openBucket();
+    var N1qlQuery=couchbase.N1qlQuery;
+    console.log(`---deleting payments of id number:`,memberId);
+    var query=N1qlQuery.fromString('delete from `IWN` where type="payment" and memberId=$1');
+    bucket.query(query,[memberId],function(err,res){
+        if(err){
+            console.error('Error deleting contact payments---',err);
+        }
+    })
 }
 
 function getKey(contact) {
@@ -98,7 +119,6 @@ function getKey(contact) {
 function openBucket() {
     try {
         console.log("-------- open bucket -------");
-        console.log("config is: ",config);
         var cluster = new couchbase.Cluster(address);
         cluster.authenticate(config.database.credentials.username, config.database.credentials.password)
         var bucket = cluster.openBucket('IWN');
@@ -205,3 +225,4 @@ exports.getUserByToken = getUserByToken;
 exports.saveUser = saveUser;
 exports.deleteContact = deleteContact;
 exports.IdUniqueCheck = IdUniqueCheck;
+exports.deletePayment = deletePayment;

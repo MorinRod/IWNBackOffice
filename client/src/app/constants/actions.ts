@@ -11,6 +11,7 @@ export const Members = {
   PaymentsLoaded: 'Member payments loaded',
   GetPayments: 'Get member payments',
   SavePayment: 'Save Payment for member',
+  DeletePayment:'Delete Payment',
   DeleteMember: 'Delete member',
   Deleted: 'Member deleted successfully',
   IdUniqeCheck:'Uniqness of Id number checked for new member',

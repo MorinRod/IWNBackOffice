@@ -4,4 +4,5 @@
   <input [labelText]="'התקבל'" id="newPAymentAccepted" type="checkbox" name="paymentAccepted" [(ngModel)]="payment.accepted"/>
   <input [labelText]="'אסמכתא'" type="number" name="paymentTransactionId" [(ngModel)]="payment.transactionId">
   <button type="submit" class="glyphicon glyphicon-floppy-disk"></button>
+  <button type="button" class="glyphicon glyphicon-remove" (click)="revertChanges()"></button>
 </form>

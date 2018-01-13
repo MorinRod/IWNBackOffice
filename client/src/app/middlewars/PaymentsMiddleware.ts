@@ -3,7 +3,6 @@ import {Http} from "@angular/http";
 import {HttpClient} from "@angular/common/http"
 import {Server, Members, Users} from "../constants/actions";
 import {Payment} from "../models/payment";
-//import { AuthHttp }  from 'angular2-jwt';
 import {configuration} from '../constants/configuration';
 
 /**
@@ -95,6 +94,24 @@ export class PaymentsMiddleware {
 
   }
 
+  deletePayment(store,next,action){
+    const successHandler = result =>{
+      return next({
+        type:Members.PaymentsLoaded,
+        payload:action.payload as Payment
+      });
+    };
+    const errorHandler = error => {
+      return next({
+        type:Members.LoadingError,
+        payload: error
+      });
+    };
+    this._http.delete(`${this.url}/${action.payload.transactionId}`)
+    .subscribe(successHandler,errorHandler);
+
+  }
+
   middleware = store => next => action => {
     console.debug('reached payment middleware');
     if (action.type === Members.GetPayments) {
@@ -102,6 +119,9 @@ export class PaymentsMiddleware {
     }
     else if (action.type === Members.SavePayment){
       return this.savePayments(store, next, action);
+    }
+    else if(action.type === Members.DeletePayment){
+      return this.deletePayment(store,next,action);
     }
 
     return next(action);
