@@ -22,7 +22,7 @@ export class AppComponent {
       && !!this._store.state.currentUser[this._store.state.currentUser.length - 1]
   }
 
-  constructor(_store: Store, userActions: UsersActions, private auth: Auth) {
+  constructor(_store: Store, userActions: UsersActions) {
     this._store = _store;
     this.userActions = userActions;
     this.userActions.getCurrnetUser();
