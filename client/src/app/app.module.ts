@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule,JsonpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
 import { routing } from './app.routes';
 import { MembersListComponent } from './components/membersList.component';
@@ -24,18 +23,10 @@ import { HilightPipe } from './pipes/hilight.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { SortArrowDirective } from './directives/sort-arrow.directive';
 import { MemberPaymentComponent } from './components/member-payment/member-payment.component';
-import { AUTH_PROVIDERS }      from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
-import { AuthHttp, AuthConfig } from 'angular2-jwt';
-import { UniqueIdCheckService } from './services/unique-id-check.service';
 import { ErrorMsgComponent } from './components/error-msg/error-msg.component';
-
-
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig({
-    tokenName: 'id_token',
-  }), http, options);
-}
+import {HttpClientModule} from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -72,17 +63,26 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     JsonpModule,
     routing,
-    CommonComponents
+    CommonComponents,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('id_token');
+        },
+        whitelistedDomains: ['localhost:5000']
+      }
+    })
   ],
-  providers: [UniqueIdCheckService,Store, ...APP_ACTIONS, ...APP_Middlewars
-  ,{
-      provide: AuthHttp,
-      useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions],
-      //providers: [UniqueIdCheckService]
-    }],
+  providers: [Store, ...APP_ACTIONS, ...APP_Middlewars
+  // ,{
+  //     provide: AuthHttp,
+  //     useFactory: authHttpServiceFactory,
+  //     deps: [Http, RequestOptions]
+  //   }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

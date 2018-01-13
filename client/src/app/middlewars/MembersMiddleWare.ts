@@ -2,9 +2,9 @@ import {Injectable} from "@angular/core";
 import {Server, Members, Users} from '../constants/actions';
 import {configuration} from '../constants/configuration';
 import {Http} from "@angular/http";
-import {AuthHttp}  from 'angular2-jwt';
+import {HttpClient} from "@angular/common/http"
 import {Member} from "../models/Member";
-//import { HttpClient, HttpParams } from '@angular/common/http';
+
 
 
 /**
@@ -14,17 +14,17 @@ import {Member} from "../models/Member";
 export class MembersMiddleware {
 
 
-    private _http: Http;
-    private url: string;
+  private _http: HttpClient;
+  private url: string;
 
-    constructor(_http: Http,private authHttp: AuthHttp) {
-        this._http = _http;
-        this.url = //'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+  constructor(_http: HttpClient) {
+    this._http = _http;
+    this.url = //'http://iwndataservices20161217050028.azurewebsites.net/api/members';// 'http://iwndataservices20161217050028.azurewebsites.net/api/members';
       //  'http://10.0.0.6/IWNDataServices/api/members';
-          //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
-          configuration.devUrl;
-        
-    }
+      //'http://iwndataservices20161217050028.azurewebsites.net/api/members';
+      configuration.devUrl;
+
+  }
 
 
   setChangedMember(store, editedMember: Member, savedMember: Member) {
@@ -36,12 +36,12 @@ export class MembersMiddleware {
 
     if (!editedMember.memberId || !changedMember) {
       members[members.indexOf(editedMember)] = savedMember;
-      }
+    }
     else {
       members[members.indexOf(changedMember)] = savedMember;
-        }
-        return members;
-     }
+    }
+    return members;
+  }
 
   getContacts(store, next) {
 
@@ -49,8 +49,7 @@ export class MembersMiddleware {
     const successHandler = result => {
       store.dispatch({type: Server.DismissServerCall});
       console.log('contacts result', result);
-      let results = result.json();
-      results.forEach(contact => {
+      result.forEach(contact => {
         contact.isEdited = false;
         if (!contact.eMail) {
           contact.eMail = contact.email;
@@ -65,28 +64,28 @@ export class MembersMiddleware {
 
       return next({
         type: Members.Loaded,
-        payload: results
+        payload: result
       });
     };
 
 
 
-          const errorHandler = error => {
+    const errorHandler = error => {
 
-              console.log('error', error);
-              store.dispatch({type:Server.DismissServerCall});
+      console.log('error', error);
+      store.dispatch({type:Server.DismissServerCall});
 
-              if (error.status === 401){
-                  store.dispatch({type: Users.LogOut});
-              }
-              return next({
-                  type: Members.LoadingError,
-                 payload: error.status
-              });
-          }
+      if (error.status === 401){
+        store.dispatch({type: Users.LogOut});
+      }
+      return next({
+        type: Members.LoadingError,
+        payload: error.status
+      });
+    }
 
-          this.authHttp.get(this.url+'/contacts').subscribe(successHandler, errorHandler);
-          return next({type: Server.OnServerCall});
+    this._http.get(this.url+'/contacts').subscribe(successHandler, errorHandler);
+    return next({type: Server.OnServerCall});
 
   }
 
@@ -104,9 +103,8 @@ export class MembersMiddleware {
     }
 
     else if (action.type === Members.SaveMember) {
-      console.log('check uniqness of id: ',action.payload);
       const idCheckSuccessHandler = result =>{
-        if(result.text() === "true"){ //if contact id number already exists
+        if(result){ //if contact id number already exists
           store.dispatch({type: Members.GetMembers});
           return next({
             type: Members.ErrorMessageAdded,
@@ -115,46 +113,43 @@ export class MembersMiddleware {
         }
         else{ //contact id number doesn't exisis
 
-        const addContactSuccessHandler = result => {
-          //return this.getContacts(store, next);
-           let newPayload = this.setChangedMember(store,action.payload, result.json());
-           return next({type: Members.GetMembers, payload: newPayload});
+          const addContactSuccessHandler = result => {
+            let newPayload = this.setChangedMember(store,action.payload, result);
+            return next({type: Members.GetMembers, payload: newPayload});
 
-        };
+          };
 
-        const addContactErrorHandler = error => next({
-          type: Members.LoadingError,
-          payload: error.json()
-        });         
+          const addContactErrorHandler = error => next({
+            type: Members.LoadingError,
+            payload: error
+          });
 
-          this.authHttp.post(this.url+'/contacts', action.payload)
-          .subscribe(addContactSuccessHandler, addContactErrorHandler);
+          this._http.post(this.url+'/contacts', action.payload)
+            .subscribe(addContactSuccessHandler, addContactErrorHandler);
         }
       };
 
       const idCheckErrorHandler = error => next =>({
         type: Members.LoadingError,
-        payload: error.json
+        payload: error
       });
 
-      this.authHttp.get(`${this.url}/contacts/IdUniqueCheck/${action.payload.idNumber}`)
-      .subscribe(idCheckSuccessHandler,idCheckErrorHandler);
+      this._http.get(`${this.url}/contacts/IdUniqueCheck/${action.payload.idNumber}`)
+        .subscribe(idCheckSuccessHandler,idCheckErrorHandler);
 
     }
 
     else if (action.type === Members.DeleteMember) {
       console.log('payload', action.payload);
       const deleteMemberSuccessHandler = result => {
-        //return next({type: Members.Deleted, payload: action.payload});
         return this.getContacts(store, next);
       };
 
       const errorHandler = error => next({
         type: Members.LoadingError,
-        payload: error.json()
-      });
-      // console.log("member id to delete is",action.payload.idNumber);
-      this.authHttp.delete(`${this.url}/contacts/${action.payload.key}`, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
+        payload: error
+      });  
+      this._http.delete(`${this.url}/contacts/${action.payload.key}/${action.payload.idNumber}`, action.payload).subscribe(deleteMemberSuccessHandler, errorHandler);
 
 
     }

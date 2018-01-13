@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {UsersActions} from "./actions/users.actions";
 import {Store} from "./app.store";
 import {Auth} from "./components/auth/auth.service";
-import {AuthHttp} from 'angular2-jwt';
+//import {AuthHttp} from 'angular2-jwt';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class AppComponent {
       && !!this._store.state.currentUser[this._store.state.currentUser.length - 1]
   }
 
-  constructor(_store: Store, userActions: UsersActions, private auth: Auth, private authHttp: AuthHttp) {
+  constructor(_store: Store, userActions: UsersActions, private auth: Auth) {
     this._store = _store;
     this.userActions = userActions;
     this.userActions.getCurrnetUser();

@@ -10,7 +10,7 @@
 					<a *ngIf="auth.authenticated()" [routerLink]="['/members-screen']">חברים</a>
 				</li>
 				<li>
-					<a href="">ניהול משתמשים</a>
+					<a *ngIf="auth.authenticated()" href="">ניהול משתמשים</a>
 				</li>
 				<li>
 					<a href=""></a>
