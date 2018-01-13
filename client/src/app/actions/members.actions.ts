@@ -7,6 +7,12 @@ import {Store} from "../app.store";
 import {Members} from "../constants/actions";
 import {Payment} from "../models/payment";
 import {Member} from "../models/Member";
+import {Action} from 'redux';
+import {GetPayments, SavePayment} from './payment.actions';
+
+export class GetMembers implements Action {
+  readonly type = Members.GetMembers;
+}
 
 @Injectable()
 export class MembersActions {
@@ -16,35 +22,28 @@ export class MembersActions {
     this.store = store;
   }
 
-  savePayment(payment: Payment){
-    this.store.dispatch({
-      type: Members.SavePayment,
-      payload: payment
-    });
+  savePayment(payment: Payment) {
+    this.store.dispatch(new SavePayment(payment));
   }
 
   getContacts() {
-    this.store.dispatch({
-      type: Members.GetMembers
-    });
+    this.store.dispatch(new GetMembers());
   }
 
   getPayment(memberId: string) {
-    this.store.dispatch({
-      type: Members.GetPayments,
-      payload: {memberId: memberId}
-    });
+    this.store.dispatch(new GetPayments(memberId));
   }
 
-  saveContact(contact) {
+  saveContact(contact: Member) {
     this.store.dispatch({
       type: Members.SaveMember,
       payload: contact
     });
   }
 
-  deleteMember(member){
-    this.store.dispatch({type: Members.DeleteMember,
+  deleteMember(member) {
+    this.store.dispatch({
+      type: Members.DeleteMember,
       payload: member
     });
   }
@@ -56,7 +55,7 @@ export class MembersActions {
     });
   }
 
-  deleteErrorMsg(){
+  deleteErrorMsg() {
     this.store.dispatch({
       type: Members.ErrorMessageDeleted
     })
